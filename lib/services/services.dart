@@ -12,8 +12,5 @@ Client client = Client();
 Future<Response> myRequest(String subUrl, {Map<String, dynamic> body}) async {
   return await client.post("https://rumaharisan.mascitra.co.id/api/$subUrl",
       body: body,
-      headers: {
-        'csrf-id': "rumaharisan.com",
-        "csrf-token": "ivL4hznuNg45eZvtDFNo1UypusxJISHywUt6dAX0M"
-      });
+      headers: {'csrf-id': "xxx-app-xxx", "csrf-token": "xxx-token-xxx"});
 }
