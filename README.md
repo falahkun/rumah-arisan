@@ -1,6 +1,10 @@
-# rumah_arisan
+# Hi, RumahArisan Repository
+this project based on flutter framework, 
 
-A new Flutter project.
+## Activity
+
+- Creating splash page & sign in page with integrated to based API
+> 19/08/2020
 
 ## Getting Started
 

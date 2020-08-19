@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:rumah_arisan/blocs/blocs.dart';
 import 'package:rumah_arisan/services/services.dart';
+import 'package:rumah_arisan/views/pages/pages.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,13 +12,20 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return StreamProvider.value(
+      value: AuthServices.accessToken,
+      child: MultiBlocProvider(
+        providers: [BlocProvider(create: (_) => PageBloc(OnInitialPage()))],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: Wrapper(),
+        ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -40,9 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String token = Provider.of<String>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: token != null ? Colors.amber : Colors.blue,
       ),
       body: Center(
         child: Column(
