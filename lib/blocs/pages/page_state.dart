@@ -21,3 +21,24 @@ class OnMainPage extends PageState {
   @override
   List<Object> get props => [];
 }
+
+class OnSignUpPage extends PageState {
+  final PageEvent backPage;
+  final RegisterModel registerModel;
+
+  OnSignUpPage(this.backPage, this.registerModel);
+  @override
+  List<Object> get props => [backPage, registerModel];
+}
+
+class OnCompletingSignUpPage extends PageState {
+  final PageEvent backPage;
+  final RegisterModel registerModel;
+
+  OnCompletingSignUpPage(
+    this.backPage,
+    this.registerModel,
+  );
+  @override
+  List<Object> get props => [backPage, registerModel];
+}

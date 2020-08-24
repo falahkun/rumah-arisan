@@ -91,9 +91,16 @@ class _SplashPageState extends State<SplashPage> {
                         style:
                             regular.copyWith(fontSize: 14, color: Colors.white),
                       ),
-                      Text(
-                        "Sign Up",
-                        style: bold.copyWith(fontSize: 14, color: Colors.white),
+                      GestureDetector(
+                        onTap: () {
+                          context.bloc<PageBloc>().add(GoToSignUpPage(
+                              GoToSplashPage(), RegisterModel()));
+                        },
+                        child: Text(
+                          "Sign Up",
+                          style:
+                              bold.copyWith(fontSize: 14, color: Colors.white),
+                        ),
                       ),
                     ],
                   )

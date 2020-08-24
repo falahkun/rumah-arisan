@@ -14,6 +14,18 @@ class Wrapper extends StatelessWidget {
             ? SplashPage()
             : (pageState is OnSignInPage)
                 ? SignInPage()
-                : (pageState is OnMainPage) ? MainPage() : Container());
+                : (pageState is OnMainPage)
+                    ? MainPage()
+                    : (pageState is OnSignUpPage)
+                        ? SignUpPage(
+                            onBackPage: pageState.backPage,
+                            registerModel: pageState.registerModel,
+                          )
+                        : (pageState is OnCompletingSignUpPage)
+                            ? CompletingSignUpPage(
+                                onBackPage: pageState.backPage,
+                                registerModel: pageState.registerModel,
+                              )
+                            : Container());
   }
 }

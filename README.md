@@ -6,6 +6,9 @@ this project based on flutter framework,
 - Creating splash page & sign in page with integrated to based API
 > 19/08/2020
 
+- Creating Sign Up page 
+> 24/08/2020
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

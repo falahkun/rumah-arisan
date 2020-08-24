@@ -1,20 +1,37 @@
 part of 'pages.dart';
 
-class SignInPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
+  final PageEvent onBackPage;
+  final RegisterModel registerModel;
+
+  const SignUpPage({Key key, this.onBackPage, this.registerModel})
+      : super(key: key);
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
   bool emailValid = false;
   bool passwordValid = false;
+  bool confirmPasswordValid = false;
+
+  @override
+  initState() {
+    super.initState();
+    _emailController.text = widget.registerModel.email ?? '';
+    _passwordController.text = widget.registerModel.password ?? '';
+    _confirmPasswordController.text =
+        widget.registerModel.confirmPassword ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.bloc<PageBloc>().add(GoToSplashPage());
+        context.bloc<PageBloc>().add(widget.onBackPage ?? GoToSplashPage());
         return false;
       },
       child: Scaffold(
@@ -31,14 +48,16 @@ class _SignInPageState extends State<SignInPage> {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              context.bloc<PageBloc>().add(GoToSplashPage());
+                              context
+                                  .bloc<PageBloc>()
+                                  .add(widget.onBackPage ?? GoToSplashPage());
                             },
                             child: SvgPicture.asset(
                                 "assets/icons/back_arrow.svg")),
                         SizedBox(
                           height: 27,
                         ),
-                        Text("Hi,\nWelcome Back",
+                        Text("Hi,\nSign Up",
                             style: regular.copyWith(
                                 fontSize: 18, color: Colors.black)),
                         SizedBox(
@@ -70,43 +89,23 @@ class _SignInPageState extends State<SignInPage> {
                               setState(() {
                                 passwordValid = true;
                               });
+                            } else {
+                              setState(() {
+                                passwordValid = false;
+                              });
                             }
                           },
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 18,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Forgot Password ? ",
-                              style: regular.copyWith(
-                                  fontSize: 12, color: Colors.black),
-                            ),
-                            Text("Get Now",
-                                style: bold.copyWith(
-                                    fontSize: 12, color: Colors.black)),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                        TextField(
+                          obscureText: true,
+                          controller: _confirmPasswordController,
+                          decoration: InputDecoration(
+                            labelText: "Confirm Password",
+                          ),
                         ),
-
-                        /// ini adalah bloc kode untuk menambahkan metode sign in menggunakan social media
-                        // Row(
-                        //   children: [
-                        //     IconButton(
-                        //       padding: const EdgeInsets.only(right: 20),
-                        //       icon: Icon(MdiIcons.googlePlus),
-                        //       onPressed: () async {},
-                        //     ),
-                        //     IconButton(
-                        //       padding: const EdgeInsets.only(right: 20),
-                        //       icon: Icon(MdiIcons.facebook),
-                        //       onPressed: () {},
-                        //     )
-                        //   ],
-                        // )
                       ],
                     ),
                   ),
@@ -126,31 +125,30 @@ class _SignInPageState extends State<SignInPage> {
                   right: 20,
                   bottom: 45,
                   child: GestureDetector(
-                    onTap: (emailValid && passwordValid)
+                    onTap: (emailValid &&
+                            passwordValid &&
+                            _confirmPasswordController.text ==
+                                _passwordController.text)
                         ? () async {
-                            AuthResult _authResult = await AuthServices.signIn(
-                                _emailController.text.trim(),
-                                _passwordController.text.trim());
-
-                            if (!_authResult.status) {
-                              Flushbar(
-                                message: _authResult.message,
-                                animationDuration: Duration(milliseconds: 500),
-                                duration: Duration(seconds: 2),
-                                backgroundColor: Color(0xFFFF1267),
-                                flushbarPosition: FlushbarPosition.TOP,
-                              ).show(context);
-                            } else {
-                              context.bloc<PageBloc>().add(GoToMainPage());
-                            }
+                            widget.registerModel.email = _emailController.text;
+                            widget.registerModel.password =
+                                _passwordController.text;
+                            widget.registerModel.confirmPassword =
+                                _passwordController.text;
+                            context.bloc<PageBloc>().add(
+                                GoToCompletingSignUpPage(
+                                    widget.onBackPage, widget.registerModel));
                           }
                         : () {},
                     child: Container(
                       height: 65,
                       width: 65,
                       decoration: BoxDecoration(
-                          color: (emailValid && passwordValid)
-                              ? Color(0xFF1BA0E2)
+                          color: (emailValid &&
+                                  passwordValid &&
+                                  _confirmPasswordController.text ==
+                                      _passwordController.text)
+                              ? Color(0xFFFD6585)
                               : Colors.grey,
                           borderRadius: BorderRadius.circular(6)),
                       child: Icon(
@@ -167,19 +165,12 @@ class _SignInPageState extends State<SignInPage> {
                   left: 20,
                   child: Row(mainAxisSize: MainAxisSize.min, children: [
                     Text(
-                      "Start Fresh Now ? ",
+                      "Already Have Account ? ",
                       style:
                           regular.copyWith(fontSize: 12, color: Colors.black),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        context.bloc<PageBloc>().add(
-                            GoToSignUpPage(GoToSignInPage(), RegisterModel()));
-                      },
-                      child: Text("Sign Up",
-                          style:
-                              bold.copyWith(fontSize: 12, color: Colors.black)),
-                    )
+                    Text("Sign In",
+                        style: bold.copyWith(fontSize: 12, color: Colors.black))
                   ]),
                 )
             ],

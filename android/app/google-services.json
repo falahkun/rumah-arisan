@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "933981777885",
+    "firebase_url": "https://rumah-arisan.firebaseio.com",
+    "project_id": "rumah-arisan",
+    "storage_bucket": "rumah-arisan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933981777885:android:a536b1fa8a2ec14fa3d034",
+        "android_client_info": {
+          "package_name": "com.mascitra.rumaharisan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933981777885-022b9meu8b141bseinnb0srr7kmbmgop.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mascitra.rumaharisan",
+            "certificate_hash": "f202cbc3a31b5b022b26ebe0058de3a5267fe43f"
+          }
+        },
+        {
+          "client_id": "933981777885-eie9kcfj62sdn9j1t6u5jlk29bd88mdp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNt0YwqjW6cPCJ6h_0HPx8rx1u-5ldTPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933981777885-eie9kcfj62sdn9j1t6u5jlk29bd88mdp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
