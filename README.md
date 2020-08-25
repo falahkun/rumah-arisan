@@ -9,6 +9,11 @@ this project based on flutter framework,
 - Creating Sign Up page 
 > 24/08/2020
 
+- Finishing Sign Up Page
+- Adding Image Picker 
+- Adding Error Page
+> 25/08/2020
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
