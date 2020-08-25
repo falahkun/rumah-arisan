@@ -26,6 +26,11 @@ class Wrapper extends StatelessWidget {
                                 onBackPage: pageState.backPage,
                                 registerModel: pageState.registerModel,
                               )
-                            : Container());
+                            : (pageState is OnConfirmSignUpPage)
+                                ? ConfirmSignUpPage(
+                                    onBackPage: pageState.backPage,
+                                    registerModel: pageState.registerModel,
+                                  )
+                                : Container());
   }
 }

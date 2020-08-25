@@ -12,13 +12,13 @@ class AuthServices {
 
       var data = jsonDecode(response.body);
 
-      if (data != null && !data['error']) {
+      if (data != null && data['status']) {
         saveSessions(data['accessToken']);
       }
 
       print(data);
 
-      return AuthResult(status: !data['error'], message: data['message']);
+      return AuthResult(status: data['status'], message: data['message']);
     } catch (e) {
       /// ini digunakan untuk menghandle apabila terjadi error
       return AuthResult(

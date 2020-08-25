@@ -11,7 +11,7 @@ void main() {
 }
 
 Widget getErrorWidget(FlutterErrorDetails error) {
-  return Container();
+  return ErrorPage(error: error);
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
-                // home: CompletingSignUpPage(),
+                // home: ConfirmSignUpPage(),
                 home: Wrapper(),
               );
             }),

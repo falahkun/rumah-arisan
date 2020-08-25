@@ -42,3 +42,15 @@ class OnCompletingSignUpPage extends PageState {
   @override
   List<Object> get props => [backPage, registerModel];
 }
+
+class OnConfirmSignUpPage extends PageState {
+  final PageEvent backPage;
+  final RegisterModel registerModel;
+
+  OnConfirmSignUpPage(
+    this.backPage,
+    this.registerModel,
+  );
+  @override
+  List<Object> get props => [backPage, registerModel];
+}

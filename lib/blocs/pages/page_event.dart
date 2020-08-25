@@ -37,3 +37,15 @@ class GoToCompletingSignUpPage extends PageEvent {
         registerModel,
       ];
 }
+
+class GoToConfirmSignUpPage extends PageEvent {
+  final PageEvent onBackPage;
+  final RegisterModel registerModel;
+
+  GoToConfirmSignUpPage(this.onBackPage, this.registerModel);
+  @override
+  List<Object> get props => [
+        onBackPage,
+        registerModel,
+      ];
+}

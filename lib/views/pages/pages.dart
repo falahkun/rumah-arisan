@@ -18,3 +18,5 @@ part 'signin_page.dart';
 part 'mainpage.dart';
 part 'signup_page.dart';
 part 'completing_sign_up_page.dart';
+part 'error_page.dart';
+part 'confirm_sign_up_page.dart';

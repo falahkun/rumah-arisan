@@ -20,6 +20,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       yield OnSignUpPage(event.onBackPage, event.registerModel);
     } else if (event is GoToCompletingSignUpPage) {
       yield OnCompletingSignUpPage(event.onBackPage, event.registerModel);
+    }else if (event is GoToConfirmSignUpPage) {
+      yield OnConfirmSignUpPage(event.onBackPage, event.registerModel);
     }
   }
 }

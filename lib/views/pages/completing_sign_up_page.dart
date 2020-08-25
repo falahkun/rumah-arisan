@@ -17,6 +17,17 @@ class _CompletingSignUpPageState extends State<CompletingSignUpPage> {
 
   bool nameValid = false;
   bool phoneValid = false;
+
+  @override
+  initState() {
+    super.initState();
+    setState(() {
+      _fullNameController.text = widget.registerModel.name ?? "";
+      _phoneNumberController.text = widget.registerModel.phoneNumber ?? "";
+      _pickedImage = widget.registerModel.profileImage ?? null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -78,14 +89,31 @@ class _CompletingSignUpPageState extends State<CompletingSignUpPage> {
                                   style: regular.copyWith(
                                       fontSize: 13, color: Colors.black)),
                             ),
-                            ClipPath.shape(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: Image.asset(
-                                  'assets/images/profile_unfilled.png',
-                                  height: 70,
-                                  width: 70,
-                                )),
+                            GestureDetector(
+                              onTap: () async {
+                                File _selectedImage = await pickImage();
+                                if (_selectedImage != null) {
+                                  setState(() {
+                                    _pickedImage = _selectedImage;
+                                  });
+                                }
+                              },
+                              child: ClipPath.shape(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: (_pickedImage != null)
+                                      ? Image.file(
+                                          _pickedImage,
+                                          height: 70,
+                                          width: 70,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          'assets/images/profile_unfilled.png',
+                                          height: 70,
+                                          width: 70,
+                                        )),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -146,7 +174,7 @@ class _CompletingSignUpPageState extends State<CompletingSignUpPage> {
                                 _phoneNumberController.text;
                             widget.registerModel.profileImage = _pickedImage;
                             context.bloc<PageBloc>().add(
-                                GoToCompletingSignUpPage(
+                                GoToConfirmSignUpPage(
                                     widget.onBackPage, widget.registerModel));
                           }
                         : () {},
