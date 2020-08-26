@@ -14,6 +14,11 @@ this project based on flutter framework,
 - Adding Error Page
 > 25/08/2020
 
+- Adding Firebase Remote Config
+- Adding Firebase cloud Messaging
+- fixing API Key
+> 26/08/2020
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

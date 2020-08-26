@@ -2,6 +2,7 @@ part of 'services.dart';
 
 /// ini adalah class auth services
 class AuthServices {
+
   /// ini adalah method untuk melakukan sign in
   static Future<AuthResult> signIn(String email, String password) async {
     try {
