@@ -10,6 +10,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController _passwordController = TextEditingController();
   bool emailValid = false;
   bool passwordValid = false;
+  bool isTasking = false;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -128,11 +129,15 @@ class _SignInPageState extends State<SignInPage> {
                   child: GestureDetector(
                     onTap: (emailValid && passwordValid)
                         ? () async {
+                            setState(() {
+                              isTasking = true;
+                            });
                             AuthResult _authResult = await AuthServices.signIn(
                                 _emailController.text.trim(),
                                 _passwordController.text.trim());
 
                             if (!_authResult.status) {
+                              isTasking = false;
                               Flushbar(
                                 message: _authResult.message,
                                 animationDuration: Duration(milliseconds: 500),
@@ -141,8 +146,11 @@ class _SignInPageState extends State<SignInPage> {
                                 flushbarPosition: FlushbarPosition.TOP,
                               ).show(context);
                             } else {
-                              context.bloc<PageBloc>().add(GoToMainPage());
+                              isTasking = false;
+                              // context.bloc<PageBloc>().add(GoToMainPage());
                             }
+
+                            setState(() {});
                           }
                         : () {},
                     child: Container(
@@ -153,11 +161,13 @@ class _SignInPageState extends State<SignInPage> {
                               ? Color(0xFF1BA0E2)
                               : Colors.grey,
                           borderRadius: BorderRadius.circular(6)),
-                      child: Icon(
-                        Icons.arrow_forward,
-                        size: 38,
-                        color: Colors.white,
-                      ),
+                      child: (isTasking)
+                          ? CupertinoActivityIndicator()
+                          : Icon(
+                              Icons.arrow_forward,
+                              size: 38,
+                              color: Colors.white,
+                            ),
                     ),
                   ),
                 ),

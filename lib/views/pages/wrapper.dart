@@ -5,9 +5,13 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     String token = Provider.of<String>(context);
     if (token != null) {
-      context.bloc<PageBloc>().add(GoToMainPage());
+      context.bloc<AuthBloc>().add(GetToken(token));
+      context.bloc<CloterBloc>().add(LoadCloter(token));
+      prevPageEvent = GoToMainPage();
+      context.bloc<PageBloc>().add(prevPageEvent);
     } else {
-      context.bloc<PageBloc>().add(GoToSplashPage());
+      prevPageEvent = GoToSplashPage();
+      context.bloc<PageBloc>().add(prevPageEvent);
     }
     return BlocBuilder<PageBloc, PageState>(
         builder: (_, pageState) => (pageState is OnSplashPage)

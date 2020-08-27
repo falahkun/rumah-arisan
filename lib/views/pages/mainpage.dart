@@ -18,106 +18,146 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                currentPage = index;
-              });
-            },
+      body: BlocBuilder<AuthBloc, AuthState>(builder: (context, authState) {
+        if (authState is OnLoadedToken) {
+          return Stack(
             children: [
-              Container(
-                color: Colors.amber,
-              ),
-              Container(
-                color: Colors.blue,
-              ),
-              Container(
-                color: Colors.red,
-              ),
-              Container(
-                color: Colors.brown,
-              ),
-              Container(
-                color: Colors.green,
-              ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                    color: Colors.black12, blurRadius: 4, offset: Offset(0, -4))
-              ]),
-              height: 60,
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              PageView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    currentPage = index;
+                  });
+                },
                 children: [
-                  if (currentPage == 0)
-                    SvgPicture.asset("assets/icons/Home_active.svg")
-                  else
-                    GestureDetector(
-                        onTap: () {
-                          _pageController.jumpToPage(
-                            0,
-                          );
-                        },
-                        child: SvgPicture.asset("assets/icons/Home_non.svg")),
-                  if (currentPage == 1)
-                    SvgPicture.asset("assets/icons/Activity_active.svg")
-                  else
-                    GestureDetector(
-                        onTap: () {
-                          _pageController.jumpToPage(
-                            1,
-                          );
-                        },
-                        child:
-                            SvgPicture.asset("assets/icons/Activity_non.svg")),
-                  if (currentPage == 2)
-                    SvgPicture.asset("assets/icons/Category_active.svg")
-                  else
-                    GestureDetector(
-                        onTap: () {
-                          _pageController.jumpToPage(
-                            2,
-                          );
-                        },
-                        child:
-                            SvgPicture.asset("assets/icons/Category_non.svg")),
-                  if (currentPage == 3)
-                    SvgPicture.asset("assets/icons/Notification_active.svg")
-                  else
-                    GestureDetector(
-                        onTap: () {
-                          _pageController.jumpToPage(
-                            3,
-                          );
-                        },
-                        child: SvgPicture.asset(
-                            "assets/icons/Notification_non.svg")),
-                  if (currentPage == 4)
-                    SvgPicture.asset("assets/icons/Profile_active.svg")
-                  else
-                    GestureDetector(
-                        onTap: () {
-                          _pageController.jumpToPage(
-                            4,
-                          );
-                        },
-                        child:
-                            SvgPicture.asset("assets/icons/Profile_non.svg")),
+                  BlocBuilder<CloterBloc, CloterState>(
+                    builder: (context, cloterState) =>
+                        (cloterState is OnLoadedCloter)
+                            ? Container(
+                                color: Colors.amber,
+                                child: Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                            "hello ${authState.tokenResult.data.nama}\n${authState.tokenResult.data.email}"),
+                                        FlatButton(onPressed: () async {
+                                          await AuthServices.removeSession();
+                                        }, child: Text("Sign Out"))
+                                      ],
+                                    )),
+                              )
+                            : Container(
+                                color: Colors.cyan,
+                                child: Center(
+                                    child: Text(
+                                        "hello ${authState.tokenResult.data.nama}\n${authState.tokenResult.data.email}")),
+                              ),
+                  ),
+                  Container(
+                    color: Colors.blue,
+                  ),
+                  Container(
+                    color: Colors.red,
+                  ),
+                  Container(
+                    color: Colors.brown,
+                  ),
+                  Container(
+                    color: Colors.green,
+                  ),
                 ],
               ),
-            ),
-          ),
-        ],
-      ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        offset: Offset(0, -4))
+                  ]),
+                  height: 60,
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (currentPage == 0)
+                        SvgPicture.asset("assets/icons/Home_active.svg")
+                      else
+                        GestureDetector(
+                            onTap: () {
+                              _pageController.jumpToPage(
+                                0,
+                              );
+                            },
+                            child:
+                                SvgPicture.asset("assets/icons/Home_non.svg")),
+                      if (currentPage == 1)
+                        SvgPicture.asset("assets/icons/Activity_active.svg")
+                      else
+                        GestureDetector(
+                            onTap: () {
+                              _pageController.jumpToPage(
+                                1,
+                              );
+                            },
+                            child: SvgPicture.asset(
+                                "assets/icons/Activity_non.svg")),
+                      if (currentPage == 2)
+                        SvgPicture.asset("assets/icons/Category_active.svg")
+                      else
+                        GestureDetector(
+                            onTap: () {
+                              _pageController.jumpToPage(
+                                2,
+                              );
+                            },
+                            child: SvgPicture.asset(
+                                "assets/icons/Category_non.svg")),
+                      if (currentPage == 3)
+                        SvgPicture.asset("assets/icons/Notification_active.svg")
+                      else
+                        GestureDetector(
+                            onTap: () {
+                              _pageController.jumpToPage(
+                                3,
+                              );
+                            },
+                            child: SvgPicture.asset(
+                                "assets/icons/Notification_non.svg")),
+                      if (currentPage == 4)
+                        SvgPicture.asset("assets/icons/Profile_active.svg")
+                      else
+                        GestureDetector(
+                            onTap: () {
+                              _pageController.jumpToPage(
+                                4,
+                              );
+                            },
+                            child: SvgPicture.asset(
+                                "assets/icons/Profile_non.svg")),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else if (authState is OnUnauthorizedToken) {
+          context.bloc<AuthBloc>().add(SignOut());
+
+          ///in update adding param for a error message will show on popup in splashpage
+          context.bloc<PageBloc>().add(GoToSplashPage());
+          return Container();
+        } else if (authState is OnError) {
+          return Center(
+            child: Text("message : ${authState.message}"),
+          );
+        }
+        return Center(child: CircularProgressIndicator());
+      }),
     );
   }
 }

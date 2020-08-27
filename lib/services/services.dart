@@ -1,3 +1,4 @@
+import 'dart:async';
 /// ini adalah baris untuk menambahkan packages
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,12 +13,14 @@ part 'auth_services.dart';
 part 'report_services.dart';
 part 'remote_config_service.dart';
 part 'fcm_services.dart';
+part 'cloter_services.dart';
+part 'slider_services.dart';
 
 /// ini adalah baris untuk inisialisasi variable
 Client client = Client();
 
 /// ini adalah method untuk melakukan semua request yang akan digunakan nantinya
-Future<Response> myRequest(String subUrl, {Map<String, dynamic> body}) async {
+Future<Response> postRequest(String subUrl, {Map<String, dynamic> body, String memberToken}) async {
 
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
@@ -27,6 +30,21 @@ Future<Response> myRequest(String subUrl, {Map<String, dynamic> body}) async {
       body: body,
       headers: {
         'csrf-id':headers['csrf-id'],
-        'csrf-token':headers['csrf-token']
+        'csrf-token':headers['csrf-token'],
+        'member-token':memberToken ?? ''
+      });
+}
+
+Future<Response> getRequest(String subUrl, {String memberToken}) async {
+
+  var headers = await RemoteConfigService.getHeaders();
+  var baseUrl = await RemoteConfigService.getBaseUrl();
+
+  print("$baseUrl - $headers");
+  return await client.get("$baseUrl/$subUrl",
+      headers: {
+        'csrf-id':headers['csrf-id'],
+        'csrf-token':headers['csrf-token'],
+        'member-token':memberToken ?? ''
       });
 }

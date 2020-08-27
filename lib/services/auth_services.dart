@@ -6,7 +6,7 @@ class AuthServices {
   /// ini adalah method untuk melakukan sign in
   static Future<AuthResult> signIn(String email, String password) async {
     try {
-      final response = await myRequest("auth/login", body: {
+      final response = await postRequest("auth/login", body: {
         "email": email,
         "password": password,
       });
@@ -18,9 +18,9 @@ class AuthServices {
       }
 
       print(data);
-
       return AuthResult(status: data['status'], message: data['message']);
     } catch (e) {
+      print(e.toString());
       /// ini digunakan untuk menghandle apabila terjadi error
       return AuthResult(
           status: false,
@@ -33,6 +33,7 @@ class AuthServices {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
     print("saved into local");
+    _changeAuthState(token);
     await _sharedPreferences.setString('token', token);
   }
 
@@ -46,11 +47,35 @@ class AuthServices {
   static Future removeSession() async {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
-
     await _sharedPreferences.clear();
+    _changeAuthState(null);
   }
 
   /// kita buat/konsumsi kedalam stream agar lebih mudah menggunakannya
-  static Stream<String> get accessToken =>
-      Stream.fromFuture(getCurrentSession()).asBroadcastStream();
+  static Stream<String> get _accessToken =>
+      Stream.fromFuture(getCurrentSession());
+
+  ///digunakan untuk mengambil data token dari server
+  static Future<TokenResult> getTokenResult(String token) async {
+    try {
+      final response = await postRequest('auth/get_token', memberToken: token);
+      print(response.body);
+      return TokenResult.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// method for adding event in stream
+  static void _changeAuthState(String token) async {
+    _controller.sink.add(token);
+  }
+  
+  static StreamController<String> _controller = StreamController<String>.broadcast()..addStream(_accessToken);
+
+  static Future<void> dispose() => _controller.close();
+
+  /// baris code ini digunakan untuk mengambil data yang tersimpan di local (sharedpreferences)
+  /// agar lebih mudah untuk consumenya jadi kita pakai stream untuk listen data.
+  static Stream<String> get onAuthStateChanged => _controller.stream;
 }

@@ -19,9 +19,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ErrorWidget.builder = getErrorWidget;
     return StreamProvider.value(
-      value: AuthServices.accessToken,
+      value: AuthServices.onAuthStateChanged,
       child: MultiBlocProvider(
-        providers: [BlocProvider(create: (_) => PageBloc(OnInitialPage()))],
+        providers: [
+          BlocProvider(create: (_) => PageBloc(OnInitialPage())),
+          BlocProvider(
+            create: (_) => AuthBloc(OnInitialAuth()),
+          ),
+          BlocProvider(
+            create: (_) => CloterBloc(OnInitialCloter()),
+          ),
+          BlocProvider(
+            create: (_) => SliderBloc(OnInitialSlider()),
+          ),
+        ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),
             builder: (context, snapshot) {

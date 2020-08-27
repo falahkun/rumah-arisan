@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:rumah_arisan/main.dart';
+import 'package:rumah_arisan/models/models.dart';
 import 'package:rumah_arisan/services/services.dart';
 
 void main() {
@@ -33,5 +34,13 @@ void main() {
     Map _headers = await RemoteConfigService.getHeaders();
     print(_headers.toString());
     expect(_headers, null);
+  });
+
+  test("Testing getToken", () async {
+    TokenResult _token = await AuthServices.getTokenResult("X7t9lCD96O6q7qkGJuLP8fTf8fWRqjG4W3meN9Htl");
+
+    print(_token.status);
+
+    expect(_token.status, true);
   });
 }

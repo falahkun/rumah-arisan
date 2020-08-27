@@ -8,3 +8,5 @@ TextStyle bold = GoogleFonts.notoSans(
   fontWeight: FontWeight.w700,
   fontSize: 14
 );
+
+PageEvent prevPageEvent;
