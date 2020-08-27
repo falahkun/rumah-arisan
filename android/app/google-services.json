@@ -42,6 +42,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933981777885:android:ca99df073fc2fba2a3d034",
+        "android_client_info": {
+          "package_name": "com.mascitra.rumaharisan.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933981777885-qudtsd7ip3g83q7riq1psvpssa116h2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mascitra.rumaharisan.dev",
+            "certificate_hash": "fee51f16534a2e1499f00a5e7eee5605ab0f06bb"
+          }
+        },
+        {
+          "client_id": "933981777885-eie9kcfj62sdn9j1t6u5jlk29bd88mdp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNt0YwqjW6cPCJ6h_0HPx8rx1u-5ldTPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933981777885-eie9kcfj62sdn9j1t6u5jlk29bd88mdp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

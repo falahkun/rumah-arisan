@@ -24,6 +24,7 @@ this project based on flutter framework,
 - Adding Service & Model & Bloc for Cloter
 - Fixing AuthServices.dart
 - Fixing Wrapper.dart
+- Adding Flavour dev
 > 27/08/2020
 
 
