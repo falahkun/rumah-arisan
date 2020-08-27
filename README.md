@@ -19,6 +19,14 @@ this project based on flutter framework,
 - fixing API Key
 > 26/08/2020
 
+- Fixing Auth Session Stream
+- Adding service & Model & Bloc for slider
+- Adding Service & Model & Bloc for Cloter
+- Fixing AuthServices.dart
+- Fixing Wrapper.dart
+> 27/08/2020
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
