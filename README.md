@@ -27,6 +27,17 @@ this project based on flutter framework,
 - Adding Flavour dev
 > 27/08/2020
 
+- adding unilink
+- *adding Slider (no error in screen but error message has found)*
+- adding search bar(view only no action)
+- adding top bar (view only no action)
+- auto redirect from url
+- fixing error page
+- fixing mainpage
+- adding next-step register (view only no action & half)
+> 28/08/2020
+
+
 
 ## Getting Started
 

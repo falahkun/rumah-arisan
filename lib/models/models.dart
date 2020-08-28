@@ -6,3 +6,4 @@ part 'register_model.dart';
 part 'token_result.dart';
 part 'cloter_model.dart';
 part 'slider_model.dart';
+part 'user_model.dart';

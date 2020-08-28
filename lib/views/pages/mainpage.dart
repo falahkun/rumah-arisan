@@ -17,6 +17,7 @@ class MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.bloc<SliderBloc>().add(LoadSlider(null));
     return Scaffold(
       body: BlocBuilder<AuthBloc, AuthState>(builder: (context, authState) {
         if (authState is OnLoadedToken) {
@@ -31,30 +32,7 @@ class MainPageState extends State<MainPage> {
                   });
                 },
                 children: [
-                  BlocBuilder<CloterBloc, CloterState>(
-                    builder: (context, cloterState) =>
-                        (cloterState is OnLoadedCloter)
-                            ? Container(
-                                color: Colors.amber,
-                                child: Center(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                            "hello ${authState.tokenResult.data.nama}\n${authState.tokenResult.data.email}"),
-                                        FlatButton(onPressed: () async {
-                                          await AuthServices.removeSession();
-                                        }, child: Text("Sign Out"))
-                                      ],
-                                    )),
-                              )
-                            : Container(
-                                color: Colors.cyan,
-                                child: Center(
-                                    child: Text(
-                                        "hello ${authState.tokenResult.data.nama}\n${authState.tokenResult.data.email}")),
-                              ),
-                  ),
+                  HomePage(tokenResult: authState.tokenResult,),
                   Container(
                     color: Colors.blue,
                   ),
@@ -65,6 +43,9 @@ class MainPageState extends State<MainPage> {
                     color: Colors.brown,
                   ),
                   Container(
+                    child: Center(child: FlatButton(onPressed: () async {
+                      await AuthServices.removeSession();
+                    }, child: Text("Logout")),),
                     color: Colors.green,
                   ),
                 ],

@@ -49,3 +49,15 @@ class GoToConfirmSignUpPage extends PageEvent {
         registerModel,
       ];
 }
+
+class GoToActivateYourAccount extends PageEvent {
+  final String token;
+  final UserModel userModel;
+
+  GoToActivateYourAccount(this.token, this.userModel);
+  @override
+  List<Object> get props => [
+        token,
+        userModel,
+      ];
+}

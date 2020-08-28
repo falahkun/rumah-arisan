@@ -17,7 +17,7 @@ class AuthServices {
         saveSessions(data['accessToken']);
       }
 
-      print(data);
+      // print(data);
       return AuthResult(status: data['status'], message: data['message']);
     } catch (e) {
       print(e.toString());
@@ -44,6 +44,8 @@ class AuthServices {
     return _sharedPreferences.getString('token');
   }
 
+  /// method ini digunakan untuk meremove session yang tersimpan,
+  /// bisa juga digunakan untuk logout.
   static Future removeSession() async {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
@@ -59,10 +61,37 @@ class AuthServices {
   static Future<TokenResult> getTokenResult(String token) async {
     try {
       final response = await postRequest('auth/get_token', memberToken: token);
-      print(response.body);
+      // print(response.body);
       return TokenResult.fromJson(jsonDecode(response.body));
     } catch (e) {
       return null;
+    }
+  }
+
+
+  /// untuk register next-step
+  /// get data usernya 
+  static Future<UserModel> getUser(String token, String code) async {
+    try {
+      final response = await getRequest("auth/user");
+
+      return userModelFromJson(response.body);
+    }catch (e) {
+      return UserModel(status: false, message: "Can't Connect to server, please contact admin!");
+    }
+  }
+
+  /// untuk register next-step
+  /// put data usernya
+  static Future<void> putUser(String token, String code, UserModel user) async {
+    try {
+      final response = await putRequest("auth/user", body: user.toJson());
+
+      print(response.body);
+
+
+    } catch (e) {
+      throw Exception(e);
     }
   }
 
@@ -73,6 +102,7 @@ class AuthServices {
   
   static StreamController<String> _controller = StreamController<String>.broadcast()..addStream(_accessToken);
 
+  /// baris code ini digunakan untuk menutup stream onAuthStateChanged apabila sudah tidak digunakan.
   static Future<void> dispose() => _controller.close();
 
   /// baris code ini digunakan untuk mengambil data yang tersimpan di local (sharedpreferences)

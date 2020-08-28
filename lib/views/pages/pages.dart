@@ -21,3 +21,5 @@ part 'signup_page.dart';
 part 'completing_sign_up_page.dart';
 part 'error_page.dart';
 part 'confirm_sign_up_page.dart';
+part 'home_page.dart';
+part 'activate_your_account.dart';

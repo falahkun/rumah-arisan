@@ -54,3 +54,13 @@ class OnConfirmSignUpPage extends PageState {
   @override
   List<Object> get props => [backPage, registerModel];
 }
+
+class OnActivateYourAccount extends PageState {
+  final String token;
+  final UserModel userModel;
+
+  OnActivateYourAccount(this.token, this.userModel);
+  @override
+  List<Object> get props => [token, userModel];
+}
+

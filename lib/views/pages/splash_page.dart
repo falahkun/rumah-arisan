@@ -32,6 +32,12 @@ class _SplashPageState extends State<SplashPage> {
   ];
 
   @override
+  initState() {
+    super.initState();
+    UnilinkServices.getLink();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

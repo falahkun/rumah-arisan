@@ -10,7 +10,7 @@ class RemoteConfigService {
       String csrfId = _remoteConfig.getString("csrf_id");
       String csrfToken = _remoteConfig.getString("csrf_token");
 
-      print(csrfToken + csrfId);
+      // print(csrfToken + csrfId);
 
       return {'csrf-id': csrfId ?? '', 'csrf-token': csrfToken ?? ''};
     } catch (e) {

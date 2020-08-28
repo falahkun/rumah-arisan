@@ -4,12 +4,20 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String token = Provider.of<String>(context);
+    
     if (token != null) {
       context.bloc<AuthBloc>().add(GetToken(token));
       context.bloc<CloterBloc>().add(LoadCloter(token));
+      context.bloc<SliderBloc>().add(LoadSlider(token));
       prevPageEvent = GoToMainPage();
       context.bloc<PageBloc>().add(prevPageEvent);
     } else {
+      UnilinkServices.getLink().then((value) {
+      if(value != null) {
+        var token = UnilinkServices.getTokenFromUrl(value);
+        context.bloc<PageBloc>().add(GoToActivateYourAccount(token, null));
+      }
+    });
       prevPageEvent = GoToSplashPage();
       context.bloc<PageBloc>().add(prevPageEvent);
     }
@@ -35,6 +43,8 @@ class Wrapper extends StatelessWidget {
                                     onBackPage: pageState.backPage,
                                     registerModel: pageState.registerModel,
                                   )
-                                : Container());
+                                : (pageState is OnActivateYourAccount) ? ActivateYourAccountPage(
+                                  model: pageState.userModel, token: pageState.token,
+                                ) : Container());
   }
 }

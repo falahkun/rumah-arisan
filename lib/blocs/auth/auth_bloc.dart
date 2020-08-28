@@ -13,7 +13,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is GetToken) {
       TokenResult _tokenResult = await AuthServices.getTokenResult(event.token);
-      print(_tokenResult.toString());
       if (_tokenResult != null && _tokenResult.status) {
         yield OnLoadedToken(_tokenResult);
       } else if (_tokenResult != null && !_tokenResult.status) {
