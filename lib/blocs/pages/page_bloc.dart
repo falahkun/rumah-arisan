@@ -20,10 +20,17 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       yield OnSignUpPage(event.onBackPage, event.registerModel);
     } else if (event is GoToCompletingSignUpPage) {
       yield OnCompletingSignUpPage(event.onBackPage, event.registerModel);
-    }else if (event is GoToConfirmSignUpPage) {
+    } else if (event is GoToConfirmSignUpPage) {
       yield OnConfirmSignUpPage(event.onBackPage, event.registerModel);
-    }else if (event is GoToActivateYourAccount) {
+    } else if (event is GoToActivateYourAccount) {
       yield OnActivateYourAccount(event.token, event.userModel);
+    } else if (event is GoToCompletingActivating) {
+      yield OnCompletingActivating(event.userModel);
+    } else if (event is GoToSuccessPage) {
+      yield OnSuccessPage(
+        event.isRegister,
+        message: event.message,
+      );
     }
   }
 }

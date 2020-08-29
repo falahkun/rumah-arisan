@@ -4,7 +4,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String token = Provider.of<String>(context);
-    
+
     if (token != null) {
       context.bloc<AuthBloc>().add(GetToken(token));
       context.bloc<CloterBloc>().add(LoadCloter(token));
@@ -13,11 +13,16 @@ class Wrapper extends StatelessWidget {
       context.bloc<PageBloc>().add(prevPageEvent);
     } else {
       UnilinkServices.getLink().then((value) {
-      if(value != null) {
-        var token = UnilinkServices.getTokenFromUrl(value);
-        context.bloc<PageBloc>().add(GoToActivateYourAccount(token, null));
-      }
-    });
+        if (value != null) {
+          var token = UnilinkServices.getTokenFromUrl(value);
+          var code = UnilinkServices.getCodeFromUrl(value);
+
+          context.bloc<UserBloc>().add(LoadUser(token, code));
+
+          context.bloc<PageBloc>().add(GoToActivateYourAccount(
+              token, UserData(kode: code, memberToken: token)));
+        }
+      });
       prevPageEvent = GoToSplashPage();
       context.bloc<PageBloc>().add(prevPageEvent);
     }
@@ -43,8 +48,15 @@ class Wrapper extends StatelessWidget {
                                     onBackPage: pageState.backPage,
                                     registerModel: pageState.registerModel,
                                   )
-                                : (pageState is OnActivateYourAccount) ? ActivateYourAccountPage(
-                                  model: pageState.userModel, token: pageState.token,
-                                ) : Container());
+                                : (pageState is OnActivateYourAccount)
+                                    ? ActivateYourAccountPage(
+                                        model: pageState.userModel,
+                                        token: pageState.token,
+                                      )
+                                    : (pageState is OnCompletingActivating)
+                                        ? CompletingActivatePage(
+                                            model: pageState.userModel,
+                                          )
+                                        : Container());
   }
 }

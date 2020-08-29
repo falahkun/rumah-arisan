@@ -15,4 +15,12 @@ class RegisterModel {
       this.name,
       this.phoneNumber,
       this.profileImage});
+
+
+  toJson() => {
+    "email":email,
+    "password":password,
+    "nama":name,
+    "telepon":phoneNumber,
+  };
 }

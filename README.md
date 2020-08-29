@@ -37,6 +37,11 @@ this project based on flutter framework,
 - adding next-step register (view only no action & half)
 > 28/08/2020
 
+- Finishing Register next-step (clear)
+- Fixing Sign Up (finished but not tested yet)
+- Adding Success Page
+- Design Revision in Figma 
+
 
 
 ## Getting Started

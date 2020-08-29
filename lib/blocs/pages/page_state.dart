@@ -57,10 +57,29 @@ class OnConfirmSignUpPage extends PageState {
 
 class OnActivateYourAccount extends PageState {
   final String token;
-  final UserModel userModel;
+  final UserData userModel;
 
   OnActivateYourAccount(this.token, this.userModel);
   @override
   List<Object> get props => [token, userModel];
 }
 
+class OnCompletingActivating extends PageState {
+  final UserData userModel;
+
+  OnCompletingActivating(this.userModel);
+  @override
+  List<Object> get props => [userModel];
+}
+
+class OnSuccessPage extends PageState {
+  final String message;
+  final bool isRegister;
+
+  OnSuccessPage(this.isRegister, {this.message});
+  @override
+  List<Object> get props => [
+        isRegister,
+        message,
+      ];
+}

@@ -6,20 +6,27 @@ class UnilinkServices {
       String link = await getInitialLink();
       print(link);
       return link;
-    }catch (e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
   }
 
   static StreamSubscription get uniStream => getLinksStream().listen((event) {
-    print(event);
-   }); 
+        print(event);
+      });
 
-   static String getTokenFromUrl(String url) {
-      var splitedUrl = url.split("/")[4].trim();
-      var splitedToken = splitedUrl.split("=")[1];
+  static String getTokenFromUrl(String url) {
+    var splitedUrl = url.split("/")[4].trim();
+    var splitedToken = splitedUrl.split("=")[1];
 
-      return splitedToken.split("&")[0];
-   }
+    return splitedToken.split("&")[0];
+  }
+
+  static String getCodeFromUrl(String url) {
+    var splitedUrl = url.split("/")[4].trim();
+//       var splitedToken = ;
+
+    return splitedUrl.split("=")[2];
+  }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,3 +24,5 @@ part 'error_page.dart';
 part 'confirm_sign_up_page.dart';
 part 'home_page.dart';
 part 'activate_your_account.dart';
+part 'completing_activate_your_account.dart';
+part 'success_creating_account.dart';

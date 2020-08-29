@@ -28,6 +28,19 @@ class AuthServices {
     }
   }
 
+  Future<void> saveImagePicture() async {}
+
+  Future<AuthResult> signUp(RegisterModel registerModel) async {
+    try {
+      final response = await postRequest("auth/register", body: registerModel.toJson());
+
+      var body = jsonDecode(response.body);
+      return AuthResult(status: body['status'], message: body['message']);
+    }catch (e) {
+      return AuthResult(status: false, message: "Can't Connect to server");
+    }
+  }
+
   /// ini adalah method untuk menyimpan access token yang telah didapat kedalam local/hp kita yaitu sharedPreferences
   static Future saveSessions(String token) async {
     SharedPreferences _sharedPreferences =
@@ -73,25 +86,30 @@ class AuthServices {
   /// get data usernya 
   static Future<UserModel> getUser(String token, String code) async {
     try {
-      final response = await getRequest("auth/user");
+      final response = await getRequest("auth/user?member_token=$token&kode=$code");
 
       return userModelFromJson(response.body);
     }catch (e) {
+      print(e.toString());
       return UserModel(status: false, message: "Can't Connect to server, please contact admin!");
     }
   }
 
   /// untuk register next-step
   /// put data usernya
-  static Future<void> putUser(String token, String code, UserModel user) async {
+  static Future<Map<bool, dynamic>> putUser(UserData user) async {
     try {
       final response = await putRequest("auth/user", body: user.toJson());
 
+      var body = jsonDecode(response.body);
       print(response.body);
+
+      return (body['status'] ? {true: "Success"} : {false: body['message']});
 
 
     } catch (e) {
-      throw Exception(e);
+      print(e);
+      return {false: "failed Please check your connection or call admin!"};
     }
   }
 

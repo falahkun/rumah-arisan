@@ -9,7 +9,6 @@ import 'package:rumah_arisan/models/models.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:uni_links/uni_links.dart';
-import '';
 
 /// ini adalah baris untuk menautkan halaman/file dalam folder services
 part 'auth_services.dart';
@@ -19,6 +18,7 @@ part 'fcm_services.dart';
 part 'cloter_services.dart';
 part 'slider_services.dart';
 part 'unilink_services.dart';
+part 'subdistrict_services.dart';
 
 /// ini adalah baris untuk inisialisasi variable
 Client client = Client();

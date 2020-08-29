@@ -52,7 +52,7 @@ class GoToConfirmSignUpPage extends PageEvent {
 
 class GoToActivateYourAccount extends PageEvent {
   final String token;
-  final UserModel userModel;
+  final UserData userModel;
 
   GoToActivateYourAccount(this.token, this.userModel);
   @override
@@ -60,4 +60,23 @@ class GoToActivateYourAccount extends PageEvent {
         token,
         userModel,
       ];
+}
+
+class GoToCompletingActivating extends PageEvent {
+  final UserData userModel;
+
+  GoToCompletingActivating(this.userModel);
+  @override
+  List<Object> get props => [
+        userModel,
+      ];
+}
+
+class GoToSuccessPage extends PageEvent {
+  final String message;
+  final bool isRegister;
+
+  GoToSuccessPage(this.isRegister, {this.message});
+  @override
+  List<Object> get props => [isRegister, message];
 }

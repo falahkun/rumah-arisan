@@ -32,6 +32,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (_) => SliderBloc(OnInitialSlider()),
           ),
+          BlocProvider(
+            create: (_) => UserBloc(OnInitialUser()),
+          ),
+          BlocProvider(create: (_) => SubdistrictBloc(OnInitialSubdistrict()))
         ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),
@@ -43,7 +47,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
-                // home: ConfirmSignUpPage(),
+                // home: SuccessCreatingAccountPage(isRegister: false,),
                 home: Wrapper(),
               );
             }),
