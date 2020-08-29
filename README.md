@@ -41,6 +41,8 @@ this project based on flutter framework,
 - Fixing Sign Up (finished but not tested yet)
 - Adding Success Page
 - Design Revision in Figma 
+> 29/08/2020
+># sorry time on my Pc is GMT+9 lol :v
 
 
 
