@@ -130,11 +130,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             _confirmPasswordController.text ==
                                 _passwordController.text)
                         ? () async {
-                            widget.registerModel.email = _emailController.text;
+                            widget.registerModel.email = _emailController.text.trim();
                             widget.registerModel.password =
-                                _passwordController.text;
+                                _passwordController.text.trim();
                             widget.registerModel.confirmPassword =
-                                _passwordController.text;
+                                _passwordController.text.trim();
                             context.bloc<PageBloc>().add(
                                 GoToCompletingSignUpPage(
                                     widget.onBackPage, widget.registerModel));

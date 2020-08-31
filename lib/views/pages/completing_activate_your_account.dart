@@ -185,15 +185,21 @@ class _CompletingActivatePageState extends State<CompletingActivatePage> {
                       widget.model.alamat = _alamat.text;
 
                       print(widget.model.toJson());
-
+                      widget.model.foto = await AuthServices.getSavedImage(widget.model.nama);
+                      print(widget.model.toJson());
                       await AuthServices.putUser(widget.model).then((value) {
-                        if (value[true]) {
+                        if (value['status']) {
                           context.bloc<PageBloc>().add(GoToSuccessPage(
                                 false,
                               ));
                         } else {
-                          context.bloc<PageBloc>().add(
-                              GoToSuccessPage(false, message: value[false]));
+                          Flushbar(
+                            message: value['message'],
+                            animationDuration: Duration(milliseconds: 500),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Color(0xFFFF1267),
+                            flushbarPosition: FlushbarPosition.TOP,
+                          ).show(context);
                         }
                       });
                     },

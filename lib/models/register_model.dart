@@ -22,5 +22,6 @@ class RegisterModel {
     "password":password,
     "nama":name,
     "telepon":phoneNumber,
+    "konfirmasi_password":confirmPassword
   };
 }

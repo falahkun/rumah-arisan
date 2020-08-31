@@ -11,14 +11,16 @@ class ConfirmSignUpPage extends StatefulWidget {
 }
 
 class _ConfirmSignUpPageState extends State<ConfirmSignUpPage> {
+  bool _isTasking = false;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.bloc<PageBloc>().add(GoToCompletingSignUpPage(widget.onBackPage, widget.registerModel));
+        context.bloc<PageBloc>().add(
+            GoToCompletingSignUpPage(widget.onBackPage, widget.registerModel));
         return false;
       },
-          child: Scaffold(
+      child: Scaffold(
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 30.0, left: 20, right: 20),
@@ -29,7 +31,8 @@ class _ConfirmSignUpPageState extends State<ConfirmSignUpPage> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          context.bloc<PageBloc>().add(GoToCompletingSignUpPage(widget.onBackPage, widget.registerModel));
+                          context.bloc<PageBloc>().add(GoToCompletingSignUpPage(
+                              widget.onBackPage, widget.registerModel));
                         },
                         child: SvgPicture.asset("assets/icons/back_arrow.svg")),
                   ],
@@ -71,17 +74,50 @@ class _ConfirmSignUpPageState extends State<ConfirmSignUpPage> {
                 SizedBox(
                   height: 39,
                 ),
-                Container(
-                  height: 45,
-                  width: 240,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFD6585),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Create Account",
-                      style: regular.copyWith(fontSize: 14, color: Colors.white),
+                GestureDetector(
+                  onTap: () async {
+                    setState(() {
+                      _isTasking = true;
+                    });
+                    await AuthServices.signUp(widget.registerModel)
+                        .then((value) {
+                      if (value.status) {
+                        AuthServices.saveImagePicture(widget.registerModel.name,
+                            widget.registerModel.profileImage);
+                        context.bloc<PageBloc>().add(GoToSuccessPage(true));
+                      } else {
+                        Flushbar(
+                          message: value.message,
+                          animationDuration: Duration(milliseconds: 500),
+                          duration: Duration(seconds: 2),
+                          backgroundColor: Color(0xFFFF1267),
+                          flushbarPosition: FlushbarPosition.TOP,
+                        ).show(context);
+                      }
+                      _isTasking = false;
+                    });
+
+                    setState(() {});
+                  },
+                  child: _isTasking ? Container(
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFD6585),
+                      borderRadius: BorderRadius.circular(6),
+                    ),child: CupertinoActivityIndicator()) : Container(
+                    height: 45,
+                    width: 240,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFD6585),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Create Account",
+                        style:
+                            regular.copyWith(fontSize: 14, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

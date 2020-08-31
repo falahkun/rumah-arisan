@@ -57,6 +57,6 @@ class Wrapper extends StatelessWidget {
                                         ? CompletingActivatePage(
                                             model: pageState.userModel,
                                           )
-                                        : Container());
+                                        : (pageState is OnSuccessPage) ? SuccessCreatingAccountPage(isRegister: pageState.isRegister, message: pageState.message,) : Container());
   }
 }

@@ -37,6 +37,7 @@ class UserData {
         this.alamat,
         this.kecamatanId,
         this.kodePos,
+        this.foto,
         this.memberToken,
         this.kode
     });
@@ -48,6 +49,7 @@ class UserData {
     dynamic alamat;
     dynamic kecamatanId;
     dynamic kodePos;
+    dynamic foto;
     String memberToken;
     String kode;
 
@@ -59,6 +61,7 @@ class UserData {
         alamat: json["alamat"],
         kecamatanId: json["kecamatan_id"],
         kodePos: json["kode_pos"],
+        foto: json['foto'],
         memberToken: json['member_token'],
         kode: json['kode'],
     );
@@ -71,6 +74,7 @@ class UserData {
         "alamat": alamat,
         "kecamatan_id": kecamatanId,
         "kode_pos": kodePos,
+        "foto":foto,
         "member_token":memberToken,
         "kode":kode
     };

@@ -44,6 +44,11 @@ this project based on flutter framework,
 > 29/08/2020
 ># sorry time on my Pc is GMT+9 lol :v
 
+- Adding Photo Input in register
+- Finishing Register
+- new UI Design in Figma
+> 31/08/2020
+
 
 
 ## Getting Started

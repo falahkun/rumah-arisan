@@ -28,13 +28,27 @@ class AuthServices {
     }
   }
 
-  Future<void> saveImagePicture() async {}
+  static Future<void> saveImagePicture(String name, File image) async {
+    SharedPreferences _shared = await SharedPreferences.getInstance();
 
-  Future<AuthResult> signUp(RegisterModel registerModel) async {
+    String _name = name.trim().replaceAll(" ", "_");
+    await _shared.setString(_name, base64.encode(image.readAsBytesSync()));
+  }
+
+  static Future<String> getSavedImage(String name) async {
+    SharedPreferences _shared = await SharedPreferences.getInstance();
+    
+    String _name = name.trim().replaceAll(" ", "_");
+    String _base64Image = _shared.getString(_name);
+    return _base64Image;
+  }
+
+  static Future<AuthResult> signUp(RegisterModel registerModel) async {
     try {
       final response = await postRequest("auth/register", body: registerModel.toJson());
 
       var body = jsonDecode(response.body);
+      
       return AuthResult(status: body['status'], message: body['message']);
     }catch (e) {
       return AuthResult(status: false, message: "Can't Connect to server");
@@ -97,19 +111,30 @@ class AuthServices {
 
   /// untuk register next-step
   /// put data usernya
-  static Future<Map<bool, dynamic>> putUser(UserData user) async {
+  static Future<Map<String, dynamic>> putUser(UserData user) async {
     try {
       final response = await putRequest("auth/user", body: user.toJson());
 
       var body = jsonDecode(response.body);
       print(response.body);
 
-      return (body['status'] ? {true: "Success"} : {false: body['message']});
+      var result = {
+        "status": body['status'],
+        "message":body['message']
+      };
+
+      await removeSession();
+
+      return result;
 
 
     } catch (e) {
       print(e);
-      return {false: "failed Please check your connection or call admin!"};
+      var result = {
+        "status": false,
+        "message":"failed Please check your connection or call admin!"
+      };
+      return result;
     }
   }
 

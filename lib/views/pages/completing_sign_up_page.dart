@@ -169,9 +169,9 @@ class _CompletingSignUpPageState extends State<CompletingSignUpPage> {
                     onTap: (nameValid && phoneValid)
                         ? () async {
                             widget.registerModel.name =
-                                _fullNameController.text;
+                                _fullNameController.text.trim();
                             widget.registerModel.phoneNumber =
-                                _phoneNumberController.text;
+                                _phoneNumberController.text.trim();
                             widget.registerModel.profileImage = _pickedImage;
                             context.bloc<PageBloc>().add(
                                 GoToConfirmSignUpPage(
