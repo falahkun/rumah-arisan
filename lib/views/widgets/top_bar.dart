@@ -18,7 +18,7 @@ class TopBar extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6)
           ),
-          child: (imageUrl == null) ? Image.asset("assets/images/profile_unfilled.png", height: 35, width: 35,) : Image.network(imageUrl, width: 35, height: 35,))
+          child: (imageUrl == null) ? Image.asset("assets/images/profile_unfilled.png", height: 35, width: 35, fit: BoxFit.cover,) : Image.network(imageUrl, width: 35, height: 35, fit: BoxFit.cover,))
       ],
     );
   }

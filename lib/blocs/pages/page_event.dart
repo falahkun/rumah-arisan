@@ -13,8 +13,11 @@ class GoToSignInPage extends PageEvent {
 }
 
 class GoToMainPage extends PageEvent {
+  final int indexPage;
+
+  GoToMainPage(this.indexPage);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [indexPage];
 }
 
 class GoToSignUpPage extends PageEvent {
@@ -79,4 +82,12 @@ class GoToSuccessPage extends PageEvent {
   GoToSuccessPage(this.isRegister, {this.message});
   @override
   List<Object> get props => [isRegister, message];
+}
+
+class GoToSettingPage extends PageEvent {
+  final TokenResult tokenResult;
+
+  GoToSettingPage(this.tokenResult);
+  @override
+  List<Object> get props => [tokenResult];
 }

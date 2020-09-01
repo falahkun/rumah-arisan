@@ -40,7 +40,7 @@ class AuthServices {
     
     String _name = name.trim().replaceAll(" ", "_");
     String _base64Image = _shared.getString(_name);
-    return _base64Image;
+    return "data:image/jpeg;base64,"+_base64Image.toString();
   }
 
   static Future<AuthResult> signUp(RegisterModel registerModel) async {
@@ -122,8 +122,6 @@ class AuthServices {
         "status": body['status'],
         "message":body['message']
       };
-
-      await removeSession();
 
       return result;
 

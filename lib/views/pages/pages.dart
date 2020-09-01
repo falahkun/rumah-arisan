@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:email_validator/email_validator.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_arisan/blocs/blocs.dart';
 import 'package:rumah_arisan/models/models.dart';
@@ -22,7 +24,9 @@ part 'signup_page.dart';
 part 'completing_sign_up_page.dart';
 part 'error_page.dart';
 part 'confirm_sign_up_page.dart';
-part 'home_page.dart';
+part 'home_fragment.dart';
 part 'activate_your_account.dart';
 part 'completing_activate_your_account.dart';
 part 'success_creating_account.dart';
+part 'account_fragment.dart';
+part 'setting_page.dart';

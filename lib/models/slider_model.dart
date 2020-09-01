@@ -33,21 +33,25 @@ class Slider {
         this.judul,
         this.slug,
         this.banner,
+        this.bannerM
     });
 
     String judul;
     String slug;
     String banner;
+    String bannerM;
 
     factory Slider.fromJson(Map<String, dynamic> json) => Slider(
         judul: json["judul"],
         slug: json["slug"],
         banner: json["banner"],
+        bannerM: json['banner_m']
     );
 
     Map<String, dynamic> toJson() => {
         "judul": judul,
         "slug": slug,
         "banner": banner,
+        "banner_m":bannerM,
     };
 }

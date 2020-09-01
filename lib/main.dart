@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
-                // home: SuccessCreatingAccountPage(isRegister: false,),
+                // home: SuccessCreatingAccountPage(isRegister: true,),
                 home: Wrapper(),
               );
             }),

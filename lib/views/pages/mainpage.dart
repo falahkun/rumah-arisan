@@ -1,6 +1,9 @@
 part of 'pages.dart';
 
 class MainPage extends StatefulWidget {
+  final int indexPage;
+
+  const MainPage({Key key, this.indexPage = 0}) : super(key: key);
   @override
   State<StatefulWidget> createState() => MainPageState();
 }
@@ -12,6 +15,9 @@ class MainPageState extends State<MainPage> {
   @override
   initState() {
     super.initState();
+    setState(() {
+      currentPage = widget.indexPage;
+    });
     _pageController = PageController(initialPage: currentPage, keepPage: true);
   }
 
@@ -32,7 +38,9 @@ class MainPageState extends State<MainPage> {
                   });
                 },
                 children: [
-                  HomePage(tokenResult: authState.tokenResult,),
+                  HomeFragment(
+                    tokenResult: authState.tokenResult,
+                  ),
                   Container(
                     color: Colors.blue,
                   ),
@@ -42,95 +50,100 @@ class MainPageState extends State<MainPage> {
                   Container(
                     color: Colors.brown,
                   ),
-                  Container(
-                    child: Center(child: FlatButton(onPressed: () async {
-                      await AuthServices.removeSession();
-                    }, child: Text("Logout")),),
-                    color: Colors.green,
-                  ),
+                  AccountFragment(
+                    tokenResult: authState.tokenResult,
+                  )
                 ],
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                    BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 4,
-                        offset: Offset(0, -4))
-                  ]),
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (currentPage == 0)
-                        SvgPicture.asset("assets/icons/Home_active.svg")
-                      else
-                        GestureDetector(
-                            onTap: () {
-                              _pageController.jumpToPage(
-                                0,
-                              );
-                            },
-                            child:
-                                SvgPicture.asset("assets/icons/Home_non.svg")),
-                      if (currentPage == 1)
-                        SvgPicture.asset("assets/icons/Activity_active.svg")
-                      else
-                        GestureDetector(
-                            onTap: () {
-                              _pageController.jumpToPage(
-                                1,
-                              );
-                            },
-                            child: SvgPicture.asset(
-                                "assets/icons/Activity_non.svg")),
-                      if (currentPage == 2)
-                        SvgPicture.asset("assets/icons/Category_active.svg")
-                      else
-                        GestureDetector(
-                            onTap: () {
-                              _pageController.jumpToPage(
-                                2,
-                              );
-                            },
-                            child: SvgPicture.asset(
-                                "assets/icons/Category_non.svg")),
-                      if (currentPage == 3)
-                        SvgPicture.asset("assets/icons/Notification_active.svg")
-                      else
-                        GestureDetector(
-                            onTap: () {
-                              _pageController.jumpToPage(
-                                3,
-                              );
-                            },
-                            child: SvgPicture.asset(
-                                "assets/icons/Notification_non.svg")),
-                      if (currentPage == 4)
-                        SvgPicture.asset("assets/icons/Profile_active.svg")
-                      else
-                        GestureDetector(
-                            onTap: () {
-                              _pageController.jumpToPage(
-                                4,
-                              );
-                            },
-                            child: SvgPicture.asset(
-                                "assets/icons/Profile_non.svg")),
-                    ],
-                  ),
+                child: BottomNavigationBar(
+                  backgroundColor: Colors.white,
+                  unselectedItemColor: Colors.grey,
+                  selectedLabelStyle: bold.copyWith(fontSize: 11),
+                  unselectedLabelStyle: regular.copyWith(fontSize: 11),
+                  elevation: 15,
+                  iconSize: 22,
+                  items: [
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/icons/Light/Home.svg",
+                          height: 22,
+                          width: 22,
+                          color: Colors.grey,
+                        ),
+                        activeIcon: SvgPicture.asset(
+                          "assets/icons/Bold/Home.svg",
+                          height: 22,
+                          width: 22,
+                        ),
+                        title: Text("Home")),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/icons/Light/Activity.svg",
+                          height: 22,
+                          width: 22,
+                          color: Colors.grey,
+                        ),
+                        activeIcon: SvgPicture.asset(
+                          "assets/icons/Bold/Activity.svg",
+                          height: 22,
+                          width: 22,
+                        ),
+                        title: Text("Feeds")),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/icons/Light/Category.svg",
+                          height: 22,
+                          width: 22,
+                          color: Colors.grey,
+                        ),
+                        activeIcon: SvgPicture.asset(
+                          "assets/icons/Bold/Category.svg",
+                          height: 22,
+                          width: 22,
+                        ),
+                        title: Text("Categories")),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/icons/Light/Bag.svg",
+                          height: 22,
+                          width: 22,
+                          color: Colors.grey,
+                        ),
+                        activeIcon: SvgPicture.asset(
+                          "assets/icons/Bold/Bag.svg",
+                          height: 22,
+                          width: 22,
+                        ),
+                        title: Text("Cart")),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/icons/Light/Profile.svg",
+                          height: 22,
+                          width: 22,
+                          color: Colors.grey,
+                        ),
+                        activeIcon: SvgPicture.asset(
+                          "assets/icons/Bold/Profile.svg",
+                          height: 22,
+                          width: 22,
+                        ),
+                        title: Text("Account")),
+                  ],
+                  type: BottomNavigationBarType.fixed,
+                  onTap: (index) {
+                    currentPage = index;
+                    _pageController.jumpToPage(currentPage);
+                    setState(() {});
+                  },
+                  currentIndex: currentPage,
                 ),
               ),
             ],
           );
         } else if (authState is OnUnauthorizedToken) {
           context.bloc<AuthBloc>().add(SignOut());
-
-          ///in update adding param for a error message will show on popup in splashpage
-          context.bloc<PageBloc>().add(GoToSplashPage());
           return Container();
         } else if (authState is OnError) {
           return Center(

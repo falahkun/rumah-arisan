@@ -18,8 +18,11 @@ class OnSignInPage extends PageState {
 }
 
 class OnMainPage extends PageState {
+  final int indexPage;
+
+  OnMainPage(this.indexPage);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [indexPage];
 }
 
 class OnSignUpPage extends PageState {
@@ -82,4 +85,12 @@ class OnSuccessPage extends PageState {
         isRegister,
         message,
       ];
+}
+
+class OnSettingPage extends PageState {
+  final TokenResult tokenResult;
+
+  OnSettingPage(this.tokenResult);
+  @override
+  List<Object> get props => [tokenResult];
 }

@@ -49,6 +49,13 @@ this project based on flutter framework,
 - new UI Design in Figma
 > 31/08/2020
 
+- Fixing Register upload image
+- Fixing Register next-step
+- Creating new Slider
+- Creating Setting page
+- connecting app version to Firebase Remote Config
+> 01/09/2020 
+
 
 
 ## Getting Started

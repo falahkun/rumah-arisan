@@ -9,7 +9,7 @@ class Wrapper extends StatelessWidget {
       context.bloc<AuthBloc>().add(GetToken(token));
       context.bloc<CloterBloc>().add(LoadCloter(token));
       context.bloc<SliderBloc>().add(LoadSlider(token));
-      prevPageEvent = GoToMainPage();
+      prevPageEvent = GoToMainPage(0);
       context.bloc<PageBloc>().add(prevPageEvent);
     } else {
       UnilinkServices.getLink().then((value) {
@@ -32,7 +32,7 @@ class Wrapper extends StatelessWidget {
             : (pageState is OnSignInPage)
                 ? SignInPage()
                 : (pageState is OnMainPage)
-                    ? MainPage()
+                    ? MainPage(indexPage: pageState.indexPage,)
                     : (pageState is OnSignUpPage)
                         ? SignUpPage(
                             onBackPage: pageState.backPage,
@@ -57,6 +57,6 @@ class Wrapper extends StatelessWidget {
                                         ? CompletingActivatePage(
                                             model: pageState.userModel,
                                           )
-                                        : (pageState is OnSuccessPage) ? SuccessCreatingAccountPage(isRegister: pageState.isRegister, message: pageState.message,) : Container());
+                                        : (pageState is OnSuccessPage) ? SuccessCreatingAccountPage(isRegister: pageState.isRegister, message: pageState.message,) : (pageState is OnSettingPage) ? SettingPage(tokenResult: pageState.tokenResult,) : Container());
   }
 }

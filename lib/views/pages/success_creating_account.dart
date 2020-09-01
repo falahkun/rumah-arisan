@@ -33,6 +33,8 @@ class _SuccessCreatingAccountPageState
                 style: bold.copyWith(fontSize: 23),
                 textAlign: TextAlign.center,
               ),
+              SizedBox(height: 25),
+              Image.asset("assets/images/Check.png", height: 125, width: 125,),
               Spacer(),
               if (widget.message == null)
                 Text(

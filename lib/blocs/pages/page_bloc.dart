@@ -15,7 +15,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     } else if (event is GoToSignInPage) {
       yield OnSignInPage();
     } else if (event is GoToMainPage) {
-      yield OnMainPage();
+      yield OnMainPage(event.indexPage);
     } else if (event is GoToSignUpPage) {
       yield OnSignUpPage(event.onBackPage, event.registerModel);
     } else if (event is GoToCompletingSignUpPage) {
@@ -31,6 +31,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
         event.isRegister,
         message: event.message,
       );
+    }else if (event is GoToSettingPage) {
+      yield OnSettingPage(event.tokenResult);
     }
   }
 }
