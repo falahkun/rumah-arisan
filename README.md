@@ -56,6 +56,10 @@ this project based on flutter framework,
 - connecting app version to Firebase Remote Config
 > 01/09/2020 
 
+- Fixing Slider
+- Design in Figma
+> 02/09/2020
+
 
 
 ## Getting Started
