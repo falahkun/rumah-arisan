@@ -55,6 +55,7 @@ class MainPageState extends State<MainPage> {
                   )
                 ],
               ),
+              if (MediaQuery.of(context).viewInsets.bottom == 0)
               Align(
                 alignment: Alignment.bottomCenter,
                 child: BottomNavigationBar(

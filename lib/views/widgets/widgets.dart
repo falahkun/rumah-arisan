@@ -12,3 +12,4 @@ part 'search_bar.dart';
 part 'slider_v1.dart';
 part 'slider.dart';
 part 'top_setting.dart';
+part 'arisan_grid.dart';

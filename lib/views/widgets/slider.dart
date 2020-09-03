@@ -19,29 +19,33 @@ class _SliderWidgetState extends State<SliderWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CarouselSlider(
-                items: List.generate(
-                    widget.sliderResult.data.length,
-                    (index) => Container(
-                          color: Colors.blue,
-                          child: Image.network(
-                            widget.sliderResult.data[index].bannerM,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: 269,
-                          ),
-                        )),
-                options: CarouselOptions(
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
-                    height: 269,
-                    initialPage: 0,
-                    viewportFraction: 1,
-                    scrollDirection: Axis.horizontal,
-                    autoPlay: true)),
+            if (widget.sliderResult == null ||
+                widget.sliderResult.status == false)
+              Container()
+            else
+              CarouselSlider(
+                  items: List.generate(
+                      widget.sliderResult.data.length,
+                      (index) => Container(
+                            color: Colors.blue,
+                            child: Image.network(
+                              widget.sliderResult.data[index].bannerM,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: 269,
+                            ),
+                          )),
+                  options: CarouselOptions(
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                      },
+                      height: 269,
+                      initialPage: 0,
+                      viewportFraction: 1,
+                      scrollDirection: Axis.horizontal,
+                      autoPlay: true)),
             SizedBox(
               height: 10,
             ),
@@ -57,7 +61,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                             padding: const EdgeInsets.only(left: 5.0),
                             child: Container(
                               height: 7.18,
-                              width: 7.18 ,
+                              width: 7.18,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: (currentIndex == index)
@@ -67,10 +71,10 @@ class _SliderWidgetState extends State<SliderWidget> {
                           )),
                 ),
                 Spacer(),
-                Text("Lihat Semua Promo", style: bold.copyWith(
-                  fontSize: 12,
-                  color: Color(0xFF1BA0E2)
-                ),),
+                Text(
+                  "Lihat Semua Promo",
+                  style: bold.copyWith(fontSize: 12, color: Color(0xFF1BA0E2)),
+                ),
                 SizedBox(
                   width: 15,
                 ),

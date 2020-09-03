@@ -8,32 +8,32 @@ class CloterResult {
     CloterResult({
         this.status,
         this.message,
-        this.cloters,
+        this.data,
         this.pagination,
     });
 
     bool status;
     String message;
-    List<Cloter> cloters;
+    List<CloterData> data;
     Pagination pagination;
 
     factory CloterResult.fromJson(Map<String, dynamic> json) => CloterResult(
         status: json["status"],
         message: json["message"],
-        cloters: List<Cloter>.from(json["data"].map((x) => Cloter.fromJson(x))),
+        data: List<CloterData>.from(json["data"].map((x) => CloterData.fromJson(x))),
         pagination: Pagination.fromJson(json["pagination"]),
     );
 
     Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "data": List<dynamic>.from(cloters.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
         "pagination": pagination.toJson(),
     };
 }
 
-class Cloter {
-    Cloter({
+class CloterData {
+    CloterData({
         this.id,
         this.foto,
         this.nama,
@@ -53,6 +53,7 @@ class Cloter {
         this.namaKabupaten,
         this.namaKecamatan,
         this.joined,
+        this.token,
     });
 
     String id;
@@ -74,10 +75,11 @@ class Cloter {
     dynamic namaKabupaten;
     dynamic namaKecamatan;
     bool joined;
+    String token;
 
-    factory Cloter.fromJson(Map<String, dynamic> json) => Cloter(
+    factory CloterData.fromJson(Map<String, dynamic> json) => CloterData(
         id: json["id"],
-        foto: json["foto"],
+        foto: json["foto"] == null ? null : json["foto"],
         nama: json["nama"],
         slug: json["slug"],
         namaOwner: json["nama_owner"],
@@ -95,11 +97,12 @@ class Cloter {
         namaKabupaten: json["nama_kabupaten"],
         namaKecamatan: json["nama_kecamatan"],
         joined: json["joined"],
+        token: json["token"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "foto": foto,
+        "foto": foto == null ? null : foto,
         "nama": nama,
         "slug": slug,
         "nama_owner": namaOwner,
@@ -117,12 +120,13 @@ class Cloter {
         "nama_kabupaten": namaKabupaten,
         "nama_kecamatan": namaKecamatan,
         "joined": joined,
+        "token": token,
     };
 }
 
 class Pagination {
     Pagination({
-        this.error,
+        this.status,
         this.mulai,
         this.halamanAktif,
         this.jmlData,
@@ -130,7 +134,7 @@ class Pagination {
         this.infoHalaman,
     });
 
-    bool error;
+    bool status;
     int mulai;
     int halamanAktif;
     int jmlData;
@@ -138,7 +142,7 @@ class Pagination {
     String infoHalaman;
 
     factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-        error: json["error"],
+        status: json["status"],
         mulai: json["mulai"],
         halamanAktif: json["halaman_aktif"],
         jmlData: json["jml_data"],
@@ -147,7 +151,7 @@ class Pagination {
     );
 
     Map<String, dynamic> toJson() => {
-        "error": error,
+        "status": status,
         "mulai": mulai,
         "halaman_aktif": halamanAktif,
         "jml_data": jmlData,

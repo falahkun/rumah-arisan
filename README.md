@@ -60,6 +60,12 @@ this project based on flutter framework,
 - Design in Figma
 > 02/09/2020
 
+- Adding Cloter Bloc, & Service
+- Adding Cloter GridList in home
+- Fixing AppBar
+- Fixing GridList
+> 03/09/2020
+
 
 
 ## Getting Started

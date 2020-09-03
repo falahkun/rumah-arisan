@@ -147,7 +147,6 @@ class _SignInPageState extends State<SignInPage> {
                               ).show(context);
                             } else {
                               isTasking = false;
-                              // context.bloc<PageBloc>().add(GoToMainPage());
                             }
 
                             setState(() {});
