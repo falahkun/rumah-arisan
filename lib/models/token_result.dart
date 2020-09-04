@@ -15,6 +15,7 @@ class TokenResult {
 }
 
 class DataResultToken {
+  String token;
   String email;
   String telepon;
   String foto;
@@ -31,6 +32,7 @@ class DataResultToken {
 
   DataResultToken(
       {this.akses,
+        this.token,
       this.catatanDiblokir,
       this.defaultFollower,
       this.diblokir,

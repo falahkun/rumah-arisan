@@ -13,4 +13,17 @@ class CloterServices {
           status: false);
     }
   }
+
+  static Future<CloterDetailResult> getCloter(String memberToken, {String slug}) async {
+    try {
+      final response = await getRequest("cloter?slug=$slug", memberToken: memberToken);
+
+      return CloterDetailResult.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      return CloterDetailResult(
+          message:
+          "Can't Connect To Network or Server Error Please Try again or contact Admin!",
+          status: false);
+    }
+  }
 }

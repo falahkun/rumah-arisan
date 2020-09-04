@@ -66,6 +66,11 @@ this project based on flutter framework,
 - Fixing GridList
 > 03/09/2020
 
+- Adding Cloter Detail
+- Adding Cloter Detail Bloc & service
+- i found error is a long time, but fixed now
+> 04/09/2020
+
 
 
 ## Getting Started

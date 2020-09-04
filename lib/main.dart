@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => SubdistrictBloc(OnInitialSubdistrict())),
           BlocProvider(
             create: (_) => CloterBloc(OnInitialCloter()),
-          )
+          ),
+          BlocProvider(create: (_) => CdetailBloc(OnInitialCDetail()),),
         ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),

@@ -14,7 +14,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is GetToken) {
       TokenResult _tokenResult = await AuthServices.getTokenResult(event.token);
       if (_tokenResult != null && _tokenResult.status) {
-        yield OnLoadedToken(_tokenResult);
+        TokenResult newTokenResult = _tokenResult;
+        newTokenResult.data.token = event.token;
+        yield OnLoadedToken(newTokenResult);
       } else if (_tokenResult != null && !_tokenResult.status) {
         yield OnUnauthorizedToken("You're Logged On");
       } 

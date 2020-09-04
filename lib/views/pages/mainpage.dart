@@ -23,9 +23,9 @@ class MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.bloc<SliderBloc>().add(LoadSlider(null));
     return Scaffold(
       body: BlocBuilder<AuthBloc, AuthState>(builder: (context, authState) {
+
         if (authState is OnLoadedToken) {
           return Stack(
             children: [

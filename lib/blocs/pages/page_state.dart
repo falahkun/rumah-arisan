@@ -94,3 +94,12 @@ class OnSettingPage extends PageState {
   @override
   List<Object> get props => [tokenResult];
 }
+
+class OnCdetailPage extends PageState {
+  final String slug;
+  final String memberToken;
+  final CloterDetailResult cloterData;
+  OnCdetailPage(this.memberToken, {this.slug, this.cloterData});
+  @override
+  List<Object> get props => [memberToken, slug, cloterData];
+}

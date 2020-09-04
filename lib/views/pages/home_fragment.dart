@@ -61,6 +61,7 @@ class _HomeFragmentState extends State<HomeFragment>
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: ArisanGrid(
+                          memberToken: widget.tokenResult.data.token,
                           cloterResult: cloterState.cloterResult,
                         ),
                       )
@@ -70,7 +71,6 @@ class _HomeFragmentState extends State<HomeFragment>
             ),
           ],
         ),
-        // if (scrollPositions != 0)
           Container(
             height: 95,
             decoration: BoxDecoration(

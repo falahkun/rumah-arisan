@@ -30,3 +30,4 @@ part 'completing_activate_your_account.dart';
 part 'success_creating_account.dart';
 part 'account_fragment.dart';
 part 'setting_page.dart';
+part 'cloter_detail.dart';

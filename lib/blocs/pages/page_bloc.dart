@@ -31,8 +31,11 @@ class PageBloc extends Bloc<PageEvent, PageState> {
         event.isRegister,
         message: event.message,
       );
-    }else if (event is GoToSettingPage) {
+    } else if (event is GoToSettingPage) {
       yield OnSettingPage(event.tokenResult);
+    } else if (event is GoToCdetail) {
+      yield OnCdetailPage(event.memberToken,
+          slug: event.slug);
     }
   }
 }

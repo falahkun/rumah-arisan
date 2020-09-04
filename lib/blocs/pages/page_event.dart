@@ -91,3 +91,13 @@ class GoToSettingPage extends PageEvent {
   @override
   List<Object> get props => [tokenResult];
 }
+
+class GoToCdetail extends PageEvent {
+  final String slug;
+  final String memberToken;
+  final CloterData cloterData;
+
+  GoToCdetail(this.memberToken, {this.slug, this.cloterData});
+  @override
+  List<Object> get props => [memberToken, slug, cloterData];
+}

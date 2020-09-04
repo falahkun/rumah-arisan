@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:rumah_arisan/blocs/blocs.dart';
 import 'package:rumah_arisan/models/models.dart';
 import 'package:rumah_arisan/shareds/shareds.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'splash_item.dart';
 part 'top_bar.dart';
