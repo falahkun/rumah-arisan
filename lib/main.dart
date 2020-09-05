@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
             create: (_) => CloterBloc(OnInitialCloter()),
           ),
           BlocProvider(create: (_) => CdetailBloc(OnInitialCDetail()),),
+          BlocProvider(create: (_) => CmemberBloc(OnInitialCMember()),),
         ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),

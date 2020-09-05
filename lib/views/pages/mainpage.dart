@@ -27,6 +27,8 @@ class MainPageState extends State<MainPage> {
       body: BlocBuilder<AuthBloc, AuthState>(builder: (context, authState) {
 
         if (authState is OnLoadedToken) {
+        context.bloc<CloterBloc>().add(LoadCloter(authState.tokenResult.data.token));
+        context.bloc<SliderBloc>().add(LoadSlider(authState.tokenResult.data.token));
           return Stack(
             children: [
               PageView(

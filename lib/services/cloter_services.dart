@@ -26,4 +26,17 @@ class CloterServices {
           status: false);
     }
   }
+
+  static Future<CMemberResult> getMemberOfCloter(String slug) async {
+    try {
+      final response = await getRequest("cloter/member?slug=$slug");
+
+      return CMemberResult.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      return CMemberResult(
+          message:
+          "Can't Connect To Network or Server Error Please Try again or contact Admin!",
+          status: false);
+    }
+  }
 }

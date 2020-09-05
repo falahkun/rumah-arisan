@@ -71,6 +71,10 @@ this project based on flutter framework,
 - i found error is a long time, but fixed now
 > 04/09/2020
 
+- Adding Cloter Member Bloc, & Service
+- Applying Design Cloter Detail
+> 05/09/2020
+
 
 
 ## Getting Started

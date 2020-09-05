@@ -14,7 +14,6 @@ class _HomeFragmentState extends State<HomeFragment>
   ScrollController _controller = ScrollController();
   double scrollPositions = 0;
 
-
   @override
   initState() {
     super.initState();
@@ -71,64 +70,63 @@ class _HomeFragmentState extends State<HomeFragment>
             ),
           ],
         ),
-          Container(
-            height: 95,
-            decoration: BoxDecoration(
+        Container(
+          height: 95,
+          decoration: BoxDecoration(
               color: (scrollPositions != 0) ? Colors.white : Colors.transparent,
-              boxShadow: (scrollPositions != 0) ? [
-                BoxShadow(
-                  offset: Offset(0, 2),
-                  spreadRadius: 4,
-                  blurRadius: 4,
-                  color: Colors.black12
+              boxShadow: (scrollPositions != 0)
+                  ? [
+                      BoxShadow(
+                          offset: Offset(0, 2),
+                          spreadRadius: 4,
+                          blurRadius: 4,
+                          color: Colors.black12),
+                    ]
+                  : []),
+          alignment: Alignment.topCenter,
+          child: SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 15.0),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 15,
                 ),
-              ] : []
+                Expanded(child: SearchBar()),
+                SizedBox(
+                  width: 15,
+                ),
+                SvgPicture.asset(
+                  "assets/icons/Bold/Heart.svg",
+                  color: (scrollPositions != 0) ? Colors.grey : Colors.white,
+                  height: 22,
+                  width: 22,
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                SvgPicture.asset(
+                  "assets/icons/Bold/Message.svg",
+                  color: (scrollPositions != 0) ? Colors.grey : Colors.white,
+                  height: 22,
+                  width: 22,
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                SvgPicture.asset(
+                  "assets/icons/Bold/Notification.svg",
+                  color: (scrollPositions != 0) ? Colors.grey : Colors.white,
+                  height: 22,
+                  width: 22,
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+              ],
             ),
-
-            alignment: Alignment.topCenter,
-            child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(child: SearchBar()),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      SvgPicture.asset(
-                        "assets/icons/Bold/Heart.svg",
-                        color: (scrollPositions != 0) ? Colors.grey : Colors.white,
-                        height: 22,
-                        width: 22,
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      SvgPicture.asset(
-                        "assets/icons/Bold/Message.svg",
-                        color: (scrollPositions != 0) ? Colors.grey : Colors.white,
-                        height: 22,
-                        width: 22,
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      SvgPicture.asset(
-                        "assets/icons/Bold/Notification.svg",
-                        color: (scrollPositions != 0) ? Colors.grey : Colors.white,
-                        height: 22,
-                        width: 22,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                    ],
-                  ),
-                )),
-          ),
+          )),
+        ),
       ],
     ));
   }
