@@ -75,6 +75,10 @@ this project based on flutter framework,
 - Applying Design Cloter Detail
 > 05/09/2020
 
+- Fixing GridView in homepage
+- Fixing can't load Cloter & Slider in home
+> 10/09/2020
+
 
 
 ## Getting Started

@@ -39,6 +39,7 @@ class _HomeFragmentState extends State<HomeFragment>
           shrinkWrap: true,
           padding: const EdgeInsets.all(0),
           children: [
+            /// Slider
             Container(
               height: 280 + 24.0,
               width: double.infinity,
@@ -49,6 +50,8 @@ class _HomeFragmentState extends State<HomeFragment>
                         )
                       : Container()),
             ),
+
+            /// block code for cloter
             Padding(
               padding: const EdgeInsets.only(
                 left: 20.0,
@@ -64,7 +67,19 @@ class _HomeFragmentState extends State<HomeFragment>
                           cloterResult: cloterState.cloterResult,
                         ),
                       )
-                    : Container()),
+                    : Container(
+                      child: Column(
+                        children: [
+                          Text("Can't Load Cloter"),
+                          MaterialButton(
+                            onPressed: () {
+                              context.bloc<SliderBloc>().add(LoadSlider(widget.tokenResult.data.token));
+                            },
+                            child: Text("Refresh"),
+                          ),
+                        ],
+                      ),
+                    )),
             SizedBox(
               height: 65,
             ),
