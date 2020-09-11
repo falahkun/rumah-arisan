@@ -29,6 +29,7 @@ class MainPageState extends State<MainPage> {
         if (authState is OnLoadedToken) {
         context.bloc<CloterBloc>().add(LoadCloter(authState.tokenResult.data.token));
         context.bloc<SliderBloc>().add(LoadSlider(authState.tokenResult.data.token));
+        context.bloc<CategoryBloc>().add(LoadCategory());
           return Stack(
             children: [
               PageView(
@@ -46,9 +47,7 @@ class MainPageState extends State<MainPage> {
                   Container(
                     color: Colors.blue,
                   ),
-                  Container(
-                    color: Colors.red,
-                  ),
+                  CategoryFragment(),
                   Container(
                     color: Colors.brown,
                   ),

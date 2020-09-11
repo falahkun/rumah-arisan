@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(create: (_) => CdetailBloc(OnInitialCDetail()),),
           BlocProvider(create: (_) => CmemberBloc(OnInitialCMember()),),
+          BlocProvider(create: (_) => CategoryBloc(OnInitialCategory()))
         ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),

@@ -20,6 +20,7 @@ part 'cloter_services.dart';
 part 'slider_services.dart';
 part 'unilink_services.dart';
 part 'subdistrict_services.dart';
+part 'category_services.dart';
 
 /// ini adalah baris untuk inisialisasi variable
 Client client = Client();

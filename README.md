@@ -79,6 +79,10 @@ this project based on flutter framework,
 - Fixing can't load Cloter & Slider in home
 > 10/09/2020
 
+- Adding Bloc, Service
+- Adding Category view
+> 11/09/2020
+
 
 
 ## Getting Started
