@@ -83,6 +83,10 @@ this project based on flutter framework,
 - Adding Category view
 > 11/09/2020
 
+- Adding Community Bloc, & service,
+- Adding View in Homepage for Communities,
+> 12/09/2020
+
 
 
 ## Getting Started

@@ -30,17 +30,25 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 
-  test("Testing Remote Config", () async {
-    Map _headers = await RemoteConfigService.getHeaders();
-    print(_headers.toString());
-    expect(_headers, null);
-  });
+  // test("Testing Remote Config", () async {
+  //   Map _headers = await RemoteConfigService.getHeaders();
+  //   print(_headers.toString());
+  //   expect(_headers, null);
+  // });
 
-  test("Testing getToken", () async {
-    TokenResult _token = await AuthServices.getTokenResult("X7t9lCD96O6q7qkGJuLP8fTf8fWRqjG4W3meN9Htl");
+  // test("Testing getToken", () async {
+  //   TokenResult _token = await AuthServices.getTokenResult("X7t9lCD96O6q7qkGJuLP8fTf8fWRqjG4W3meN9Htl");
 
-    print(_token.status);
+  //   print(_token.status);
 
-    expect(_token.status, true);
+  //   expect(_token.status, true);
+  // });
+
+  test("testing komunitas", () async {
+    CommunityResult _community = await CommunityServices.getCommunity("para-pengejar-tomori-kusunoki-jilid-1", "X7t9lCD96O6q7qkGJuLP8fTf8fWRqjG4W3meN9Htl");
+
+    print(_community.status);
+
+    expect(_community.status, true);
   });
 }

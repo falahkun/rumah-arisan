@@ -29,6 +29,7 @@ class MainPageState extends State<MainPage> {
         if (authState is OnLoadedToken) {
         context.bloc<CloterBloc>().add(LoadCloter(authState.tokenResult.data.token));
         context.bloc<SliderBloc>().add(LoadSlider(authState.tokenResult.data.token));
+        context.bloc<CommunitiesBloc>().add(LoadCommunities(authState.tokenResult.data.token));
         context.bloc<CategoryBloc>().add(LoadCategory());
           return Stack(
             children: [

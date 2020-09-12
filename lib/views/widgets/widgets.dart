@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rumah_arisan/blocs/blocs.dart';
@@ -17,3 +18,4 @@ part 'slider.dart';
 part 'top_setting.dart';
 part 'arisan_grid.dart';
 part 'cloter_grid_item.dart';
+part 'community_item.dart';

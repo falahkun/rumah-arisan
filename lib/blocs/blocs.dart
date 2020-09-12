@@ -8,3 +8,5 @@ export '../blocs/cloter/cloter_bloc.dart';
 export '../blocs/cloter_detail/cdetail_bloc.dart';
 export '../blocs/member_cloter/cmember_bloc.dart';
 export '../blocs/category/category_bloc.dart';
+export '../blocs/community/community_bloc.dart';
+export '../blocs/communities/communities_bloc.dart';
