@@ -2,9 +2,9 @@ part of 'community_bloc.dart';
 
 abstract class CommunityEvent {}
 
-class LoadCommuntiy extends CommunityEvent {
+class LoadCommunitiy extends CommunityEvent {
   final String slug;
   final String memberToken;
 
-  LoadCommuntiy(this.slug, this.memberToken);
+  LoadCommunitiy(this.slug, this.memberToken);
 }

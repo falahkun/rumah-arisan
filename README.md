@@ -87,6 +87,10 @@ this project based on flutter framework,
 - Adding View in Homepage for Communities,
 > 12/09/2020
 
+- Creating Community Page
+- Replacing Route using Navigator Route
+> 14/09/2020
+
 
 
 ## Getting Started

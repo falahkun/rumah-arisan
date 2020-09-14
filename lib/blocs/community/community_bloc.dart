@@ -10,8 +10,9 @@ class CommunityBloc extends Bloc<CommunityEvent, CommunityState> {
 
   @override
   Stream<CommunityState> mapEventToState(CommunityEvent event) async* {
-    if(event is LoadCommuntiy) {
-      CommunityResult _community = await CommunityServices.getCommunity(event.slug, event.memberToken);
+    if (event is LoadCommunitiy) {
+      CommunityResult _community =
+          await CommunityServices.getCommunity(event.slug, event.memberToken);
       yield OnLoadedCommunity(_community);
     }
   }

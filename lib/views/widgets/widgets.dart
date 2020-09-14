@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rumah_arisan/blocs/blocs.dart';
 import 'package:rumah_arisan/models/models.dart';
+import 'package:rumah_arisan/router/router.gr.dart';
 import 'package:rumah_arisan/shareds/shareds.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

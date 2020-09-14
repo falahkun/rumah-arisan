@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_arisan/blocs/blocs.dart';
+import 'package:rumah_arisan/router/router.gr.dart';
 import 'package:rumah_arisan/services/services.dart';
 import 'package:rumah_arisan/views/pages/pages.dart';
 
@@ -39,8 +40,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (_) => CloterBloc(OnInitialCloter()),
           ),
-          BlocProvider(create: (_) => CdetailBloc(OnInitialCDetail()),),
-          BlocProvider(create: (_) => CmemberBloc(OnInitialCMember()),),
+          BlocProvider(
+            create: (_) => CdetailBloc(OnInitialCDetail()),
+          ),
+          BlocProvider(
+            create: (_) => CmemberBloc(OnInitialCMember()),
+          ),
           BlocProvider(create: (_) => CategoryBloc(OnInitialCategory())),
           BlocProvider(create: (_) => CommunityBloc(OnInitialCommunity())),
           BlocProvider(create: (_) => CommunitiesBloc(OnInitialCommunities())),
@@ -56,7 +61,8 @@ class MyApp extends StatelessWidget {
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
                 // home: SuccessCreatingAccountPage(isRegister: true,),
-                home: Wrapper(),
+                initialRoute: "/",
+                onGenerateRoute: Router().onGenerateRoute,
               );
             }),
       ),

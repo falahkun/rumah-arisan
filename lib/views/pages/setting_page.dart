@@ -14,6 +14,23 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       body: Stack(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                  height: 15,
+                  color: Colors.white,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  child: FutureBuilder<String>(
+                    future: RemoteConfigService.getAppVersion(),
+                    builder: (_, snapshot) => Text(
+                        "Rumah Arisan | version ${snapshot.data}",
+                        textAlign: TextAlign.center),
+                  )),
+            ),
+          ),
           ListView(
             children: [
               Padding(
@@ -23,7 +40,7 @@ class _SettingPageState extends State<SettingPage> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          context.bloc<PageBloc>().add(GoToMainPage(4));
+                          Navigator.pop(context);
                         },
                         child: SvgPicture.asset("assets/icons/back_arrow.svg")),
                     Spacer(),
@@ -87,6 +104,8 @@ class _SettingPageState extends State<SettingPage> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                       AuthServices.removeSession();
+                                      Navigator.pushReplacementNamed(
+                                          context, "/");
                                     },
                                     child: Text("Sign Out"))
                               ],
@@ -95,23 +114,6 @@ class _SettingPageState extends State<SettingPage> {
                 ],
               ),
             ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  height: 15,
-                  color: Colors.white,
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: FutureBuilder<String>(
-                    future: RemoteConfigService.getAppVersion(),
-                    builder: (_, snapshot) => Text(
-                        "Rumah Arisan | version ${snapshot.data}",
-                        textAlign: TextAlign.center),
-                  )),
-            ),
           ),
         ],
       ),

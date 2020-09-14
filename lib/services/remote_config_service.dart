@@ -5,7 +5,7 @@ class RemoteConfigService {
     try {
       RemoteConfig _remoteConfig = await RemoteConfig.instance;
       await _remoteConfig.setDefaults({'welcome': 'default welcome'});
-      await _remoteConfig.fetch(expiration: const Duration(hours: 0));
+      await _remoteConfig.fetch(expiration: const Duration(hours: 5));
       await _remoteConfig.activateFetched();
       String csrfId = _remoteConfig.getString("csrf_id");
       String csrfToken = _remoteConfig.getString("csrf_token");
@@ -36,7 +36,7 @@ class RemoteConfigService {
     try {
       RemoteConfig _remoteConfig = await RemoteConfig.instance;
       await _remoteConfig.setDefaults({'welcome': 'default welcome'});
-      await _remoteConfig.fetch(expiration: const Duration(hours: 1));
+      await _remoteConfig.fetch(expiration: const Duration(hours: 5));
       await _remoteConfig.activateFetched();
       String baseUrl = _remoteConfig.getString("base_url");
       return baseUrl;

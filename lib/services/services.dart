@@ -44,7 +44,7 @@ Future<Response> getRequest(String subUrl, {String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
-  print("$baseUrl - $headers");
+  // print("$baseUrl - $headers");
   return await client.get("$baseUrl/$subUrl", headers: {
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
@@ -57,7 +57,20 @@ Future<Response> putRequest(String subUrl,
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
-  print("$baseUrl - $headers");
+  // print("$baseUrl - $headers");
+  return await client.put("$baseUrl/$subUrl", body: body, headers: {
+    'csrf-id': headers['csrf-id'],
+    'csrf-token': headers['csrf-token'],
+    'member-token': memberToken ?? ''
+  });
+}
+
+Future<Response> delete(String subUrl,
+    {Map<String, dynamic> body, String memberToken}) async {
+  var headers = await RemoteConfigService.getHeaders();
+  var baseUrl = await RemoteConfigService.getBaseUrl();
+
+  // print("$baseUrl - $headers");
   return await client.put("$baseUrl/$subUrl", body: body, headers: {
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],

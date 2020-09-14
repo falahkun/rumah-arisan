@@ -21,7 +21,7 @@ class _CloterDetailState extends State<CloterDetail> {
     print("token = ${widget.memberToken}");
     return WillPopScope(
       onWillPop: () async {
-        context.bloc<PageBloc>().add(GoToMainPage(0));
+        Navigator.pop(context);
         return false;
       },
       child: Scaffold(
@@ -248,7 +248,7 @@ class _CloterDetailState extends State<CloterDetail> {
                       padding: EdgeInsets.only(left: 20, top: 27),
                       child: GestureDetector(
                         onTap: () {
-                          context.bloc<PageBloc>().add(GoToMainPage(0));
+                          Navigator.pop(context);
                         },
                         child: SvgPicture.asset("assets/icons/back_arrow.svg"),
                       ),
@@ -258,75 +258,76 @@ class _CloterDetailState extends State<CloterDetail> {
                 ),
 
                 /// Tag Untuk Bottom Nav Bar
-                if(!cdState.cloterResult.cdetailData.joined)
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 60,
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/Bold/Chat.svg",
-                              color: Color(0xFF2C98F0),
-                            ),
-                            Text("Chat")
-                          ],
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/Bold/Discovery.svg",
-                              color: Color(0xFF2C98F0),
-                            ),
-                            Text("Discuss")
-                          ],
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: Container(
-                            child: Text("Join Arisan",
-                                style: bold.copyWith(
-                                    fontSize: 16, color: Colors.white)),
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFDD4C40),
-                              borderRadius: BorderRadius.circular(6),
+                if (!cdState.cloterResult.cdetailData.joined)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/Bold/Chat.svg",
+                                color: Color(0xFF2C98F0),
+                              ),
+                              Text("Chat")
+                            ],
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/Bold/Discovery.svg",
+                                color: Color(0xFF2C98F0),
+                              ),
+                              Text("Discuss")
+                            ],
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Text("Join Arisan",
+                                  style: bold.copyWith(
+                                      fontSize: 16, color: Colors.white)),
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFDD4C40),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                      ],
+                          SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                      decoration:
+                          BoxDecoration(color: Colors.white, boxShadow: [
+                        BoxShadow(
+                            blurRadius: 4,
+                            spreadRadius: 4,
+                            offset: Offset(0, 1),
+                            color: Colors.black12),
+                      ]),
                     ),
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                          blurRadius: 4,
-                          spreadRadius: 4,
-                          offset: Offset(0, 1),
-                          color: Colors.black12),
-                    ]),
                   ),
-                ),
               ],
             );
           }

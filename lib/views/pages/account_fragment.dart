@@ -11,7 +11,9 @@ class AccountFragment extends StatelessWidget {
         children: [
           TopSetting(
             onTap: () {
-              context.bloc<PageBloc>().add(GoToSettingPage(tokenResult));
+              Navigator.pushNamed(context, Routes.settingPage,
+                  arguments: SettingPageArguments(tokenResult: tokenResult));
+              // context.bloc<PageBloc>().add(GoToSettingPage(tokenResult));
             },
           ),
           Padding(
@@ -39,17 +41,21 @@ class AccountFragment extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                     ),
-                    SizedBox(width: 15,),
+                    SizedBox(
+                      width: 15,
+                    ),
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(tokenResult.data.nama, style: bold.copyWith(
-                          fontSize: 16
-                        ),),
-                        Text(tokenResult.data.email, style: regular.copyWith(
-                          fontSize: 12
-                        ),),
+                        Text(
+                          tokenResult.data.nama,
+                          style: bold.copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          tokenResult.data.email,
+                          style: regular.copyWith(fontSize: 12),
+                        ),
                       ],
                     )
                   ],

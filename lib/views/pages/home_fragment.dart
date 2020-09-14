@@ -80,20 +80,35 @@ class _HomeFragmentState extends State<HomeFragment>
                                                           .data.length
                                                   ? 20
                                                   : 0),
-                                          child: CommunityItem(
-                                            isLiked: false,
-                                            liked: 2,
-                                            privacy: state.communitiesResult
-                                                    .data[index].private
-                                                ? "Private"
-                                                : "Public",
-                                            rating: 4,
-                                            reactedPeople: 1,
-                                            title: state.communitiesResult
-                                                .data[index].nama,
-                                            urlImage: state.communitiesResult
-                                                    .data[index].foto ??
-                                                "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg",
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                  context, Routes.communityPage,
+                                                  arguments:
+                                                      CommunityPageArguments(
+                                                          memberToken:
+                                                              widget.tokenResult
+                                                                  .data.token,
+                                                          slug: state
+                                                              .communitiesResult
+                                                              .data[index]
+                                                              .slug));
+                                            },
+                                            child: CommunityItem(
+                                              isLiked: false,
+                                              liked: 2,
+                                              privacy: state.communitiesResult
+                                                      .data[index].private
+                                                  ? "Private"
+                                                  : "Public",
+                                              rating: 4,
+                                              reactedPeople: 1,
+                                              title: state.communitiesResult
+                                                  .data[index].nama,
+                                              urlImage: state.communitiesResult
+                                                      .data[index].foto ??
+                                                  "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg",
+                                            ),
                                           ),
                                         ))),
                           )
@@ -143,7 +158,7 @@ class _HomeFragmentState extends State<HomeFragment>
           ],
         ),
 
-        ///bloc for appbar
+        ///block code for appbar
         Container(
           height: 95,
           decoration: BoxDecoration(
