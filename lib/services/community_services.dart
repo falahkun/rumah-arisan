@@ -1,6 +1,7 @@
 part of 'services.dart';
 
 class CommunityServices {
+  /// function untuk mengambil data komunitas tunggal
   static Future<CommunityResult> getCommunity(
       String slug, String memberToken) async {
     try {
@@ -13,6 +14,7 @@ class CommunityServices {
     }
   }
 
+  /// function untuk mengambil data komunitas jamak
   static Future<CommunityResults> getCommunities(String memberToken) async {
     try {
       final response = await getRequest("komunitas", memberToken: memberToken);
@@ -23,6 +25,7 @@ class CommunityServices {
     }
   }
 
+  /// function untuk join ke komunitas
   static Future<AuthResult> joinCommunity(
       String communityId, String memberToken) async {
     try {
@@ -33,6 +36,24 @@ class CommunityServices {
       return AuthResult(status: data['status'], message: data['message']);
     } catch (e) {
       return AuthResult(status: false, message: "can't Connect To server");
+    }
+  }
+
+  /// function untuk left dari komunitas
+  static Future<AuthResult> leftCommunity(
+      String communityId, String memberToken) async {
+    try {
+      final response = await deleteRequest("komunitas/join",
+          body: {
+            "komunitas_id": communityId ?? '',
+          },
+          memberToken: memberToken);
+      print(communityId);
+      var data = jsonDecode(response.body);
+      return AuthResult(status: data['status'], message: data['message']);
+    } catch (e) {
+      print(e.toString());
+      return AuthResult(status: false, message: "Can't Connect To Server");
     }
   }
 }

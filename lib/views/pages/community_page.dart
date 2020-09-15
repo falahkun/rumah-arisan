@@ -54,25 +54,88 @@ class _CommunityPageState extends State<CommunityPage> {
                                         SizedBox(
                                           width: 8,
                                         ),
-                                        GestureDetector(
-                                            onTap: () {
-                                              showModalBottomSheet(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        ListTile(
-                                                          title: Text(
-                                                              "Leave Community"),
-                                                          onTap: () {},
-                                                        ),
-                                                      ],
-                                                    );
-                                                  });
-                                            },
-                                            child: Icon(Icons.more_vert)),
+                                        if (communityState
+                                            .communityResult.data.join.status)
+                                          GestureDetector(
+                                              onTap: () {
+                                                showModalBottomSheet(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          ListTile(
+                                                            title: Text(
+                                                                "Leave Community"),
+                                                            onTap: () {
+                                                              CommunityServices.leftCommunity(
+                                                                      communityState
+                                                                          .communityResult
+                                                                          .data
+                                                                          .id,
+                                                                      widget
+                                                                          .memberToken)
+                                                                  .then(
+                                                                      (value) {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                if (value
+                                                                    .status) {
+                                                                  Flushbar(
+                                                                    message: value
+                                                                        .message,
+                                                                    animationDuration:
+                                                                        Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                    duration: Duration(
+                                                                        seconds:
+                                                                            2),
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .black,
+                                                                    flushbarPosition:
+                                                                        FlushbarPosition
+                                                                            .TOP,
+                                                                  ).show(
+                                                                      context);
+                                                                } else {
+                                                                  Flushbar(
+                                                                    message: value
+                                                                        .message,
+                                                                    animationDuration:
+                                                                        Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                    duration: Duration(
+                                                                        seconds:
+                                                                            2),
+                                                                    backgroundColor:
+                                                                        Color(
+                                                                            0xFFFF1267),
+                                                                    flushbarPosition:
+                                                                        FlushbarPosition
+                                                                            .TOP,
+                                                                  ).show(
+                                                                      context);
+                                                                }
+                                                                context
+                                                                    .bloc<
+                                                                        CommunityBloc>()
+                                                                    .add(LoadCommunitiy(
+                                                                        widget
+                                                                            .slug,
+                                                                        widget
+                                                                            .memberToken));
+                                                              });
+                                                            },
+                                                          ),
+                                                        ],
+                                                      );
+                                                    });
+                                              },
+                                              child: Icon(Icons.more_vert)),
                                       ],
                                     ),
                                   ],

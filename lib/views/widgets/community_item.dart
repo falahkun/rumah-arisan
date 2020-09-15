@@ -106,6 +106,7 @@ class CommunityItem extends StatelessWidget {
                     Row(
                       children: [
                         RatingBar(
+                          ignoreGestures: true,
                           initialRating: rating.toDouble(),
                           minRating: 1,
                           direction: Axis.horizontal,
@@ -135,8 +136,8 @@ class CommunityItem extends StatelessWidget {
                         ),
                         Text(
                           "(${reactedPeople.toString()})",
-                          style:
-                              regular.copyWith(fontSize: 12, color: Colors.amber),
+                          style: regular.copyWith(
+                              fontSize: 12, color: Colors.amber),
                         )
                       ],
                     ),

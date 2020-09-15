@@ -4,7 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart';
+// import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rumah_arisan/models/models.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -23,57 +24,80 @@ part 'subdistrict_services.dart';
 part 'category_services.dart';
 part 'community_services.dart';
 
-/// ini adalah baris untuk inisialisasi variable
-Client client = Client();
-
 /// ini adalah method untuk melakukan semua request yang akan digunakan nantinya
-Future<Response> postRequest(String subUrl,
-    {Map<String, dynamic> body, String memberToken}) async {
+Future<http.Response> postRequest(String subUrl,
+    {Map<String, String> body, String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
-  return await client.post("$baseUrl/$subUrl", body: body, headers: {
+  http.Request rq = http.Request('POST', Uri.parse("$baseUrl/$subUrl"))
+    ..bodyFields = body;
+  rq.headers.addAll({
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
-    'member-token': memberToken ?? ''
+    'member-token': memberToken ?? '',
   });
+
+  // rq.bodyFields.addAll(body);
+  http.StreamedResponse streamedResponse = await http.Client().send(rq);
+  return http.Response.fromStream(streamedResponse);
 }
 
-Future<Response> getRequest(String subUrl, {String memberToken}) async {
+Future<http.Response> getRequest(String subUrl, {String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
-  return await client.get("$baseUrl/$subUrl", headers: {
+  http.Request rq = http.Request('GET', Uri.parse("$baseUrl/$subUrl"));
+  rq.headers.addAll({
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
     'member-token': memberToken ?? ''
   });
+
+  http.StreamedResponse streamedResponse = await http.Client().send(rq);
+  return http.Response.fromStream(streamedResponse);
 }
 
-Future<Response> putRequest(String subUrl,
-    {Map<String, dynamic> body, String memberToken}) async {
+Future<http.Response> putRequest(String subUrl,
+    {Map<String, String> body, String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
-  return await client.put("$baseUrl/$subUrl", body: body, headers: {
+  http.Request rq = http.Request('PUT', Uri.parse("$baseUrl/$subUrl"))
+    ..bodyFields = body;
+  rq.headers.addAll({
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
     'member-token': memberToken ?? ''
   });
+
+  // rq.bodyFields.addAll(body);
+  http.StreamedResponse streamedResponse = await http.Client().send(rq);
+  return http.Response.fromStream(streamedResponse);
 }
 
-Future<Response> delete(String subUrl,
-    {Map<String, dynamic> body, String memberToken}) async {
+Future<http.Response> deleteRequest(String subUrl,
+    {Map<String, String> body, String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
-  return await client.put("$baseUrl/$subUrl", body: body, headers: {
+  http.Request rq = http.Request('DELETE', Uri.parse("$baseUrl/$subUrl"))
+    ..bodyFields = body;
+  rq.headers.addAll({
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
-    'member-token': memberToken ?? ''
+    'member-token': memberToken ?? '',
+    // "Content-Type": "",
+    HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
+    // "Content-Length": "${body.length}",
   });
+
+  print(body.length);
+
+  http.StreamedResponse streamedResponse = await http.Client().send(rq);
+  return http.Response.fromStream(streamedResponse);
 }

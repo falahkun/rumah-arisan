@@ -91,6 +91,10 @@ this project based on flutter framework,
 - Replacing Route using Navigator Route
 > 14/09/2020
 
+- Replacing http request
+- Fixing Error in http request
+> 15/09/2020
+
 
 
 ## Getting Started
