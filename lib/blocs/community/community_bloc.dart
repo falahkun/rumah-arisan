@@ -14,6 +14,8 @@ class CommunityBloc extends Bloc<CommunityEvent, CommunityState> {
       CommunityResult _community =
           await CommunityServices.getCommunity(event.slug, event.memberToken);
       yield OnLoadedCommunity(_community);
+    } else {
+      yield OnInitialCommunity();
     }
   }
 }

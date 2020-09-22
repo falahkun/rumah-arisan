@@ -63,6 +63,22 @@ class AccountFragment extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 37.0, right: 36, top: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                  4,
+                  (index) => MenuItem(
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.myCommunitiesPage,
+                              arguments: MyCommunitiesPageArguments(
+                                  memberToken: tokenResult.data.token));
+                        },
+                        title: "Menu $index",
+                      )),
+            ),
+          ),
         ],
       ),
     );

@@ -49,6 +49,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => CategoryBloc(OnInitialCategory())),
           BlocProvider(create: (_) => CommunityBloc(OnInitialCommunity())),
           BlocProvider(create: (_) => CommunitiesBloc(OnInitialCommunities())),
+          BlocProvider(create: (_) => ComDiscussBloc(OnInitialComDiscuss())),
+          BlocProvider(
+            create: (_) => ChatsBloc(OnInitialChats()),
+          ),
+          BlocProvider(create: (_) => MessageBloc(OnInitialMessage())),
+          BlocProvider(create: (_) => MCBloc(OnInitialMC())),
         ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),
@@ -60,7 +66,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
-                // home: SuccessCreatingAccountPage(isRegister: true,),
+                // home: TestingPage(),
                 initialRoute: "/",
                 onGenerateRoute: Router().onGenerateRoute,
               );

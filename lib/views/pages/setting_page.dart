@@ -33,27 +33,11 @@ class _SettingPageState extends State<SettingPage> {
           ),
           ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 24, right: 20, left: 20, bottom: 31),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: SvgPicture.asset("assets/icons/back_arrow.svg")),
-                    Spacer(),
-                    Text(
-                      "Setting",
-                      style: regular.copyWith(
-                        fontSize: 18,
-                      ),
-                    ),
-                    Spacer(),
-                    SizedBox(),
-                  ],
-                ),
+              TopBar(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                title: "Settings",
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

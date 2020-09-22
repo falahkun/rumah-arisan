@@ -14,3 +14,6 @@ part 'categories_result.dart';
 part 'community_data.dart';
 part 'community_result.dart';
 part 'community_results.dart';
+part 'community_discuss_model.dart';
+part 'messages_result.dart';
+part 'chat_result.dart';

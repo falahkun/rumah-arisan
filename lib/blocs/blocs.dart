@@ -10,3 +10,7 @@ export '../blocs/member_cloter/cmember_bloc.dart';
 export '../blocs/category/category_bloc.dart';
 export '../blocs/community/community_bloc.dart';
 export '../blocs/communities/communities_bloc.dart';
+export '../blocs/community_discuss/comdiscuss_bloc.dart';
+export '../blocs/chats/chats_bloc.dart';
+export '../blocs/messages/message_bloc.dart';
+export '../blocs/member_komunitas/mcommunities_bloc.dart';

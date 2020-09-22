@@ -2,7 +2,6 @@ part of 'services.dart';
 
 /// ini adalah class auth services
 class AuthServices {
-
   /// ini adalah method untuk melakukan sign in
   static Future<AuthResult> signIn(String email, String password) async {
     try {
@@ -21,6 +20,7 @@ class AuthServices {
       return AuthResult(status: data['status'], message: data['message']);
     } catch (e) {
       print(e.toString());
+
       /// ini digunakan untuk menghandle apabila terjadi error
       return AuthResult(
           status: false,
@@ -37,20 +37,21 @@ class AuthServices {
 
   static Future<String> getSavedImage(String name) async {
     SharedPreferences _shared = await SharedPreferences.getInstance();
-    
+
     String _name = name.trim().replaceAll(" ", "_");
     String _base64Image = _shared.getString(_name);
-    return "data:image/jpeg;base64,"+_base64Image.toString();
+    return "data:image/jpeg;base64," + _base64Image.toString();
   }
 
   static Future<AuthResult> signUp(RegisterModel registerModel) async {
     try {
-      final response = await postRequest("auth/register", body: registerModel.toJson());
+      final response =
+          await postRequest("auth/register", body: registerModel.toJson());
 
       var body = jsonDecode(response.body);
-      
+
       return AuthResult(status: body['status'], message: body['message']);
-    }catch (e) {
+    } catch (e) {
       return AuthResult(status: false, message: "Can't Connect to server");
     }
   }
@@ -76,6 +77,7 @@ class AuthServices {
   static Future removeSession() async {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
+    await FCMServices.unsubscribeTopic([_sharedPreferences.getString('token')]);
     await _sharedPreferences.clear();
     _changeAuthState(null);
   }
@@ -88,24 +90,27 @@ class AuthServices {
   static Future<TokenResult> getTokenResult(String token) async {
     try {
       final response = await postRequest('auth/get_token', memberToken: token);
-      // print(response.body);
+      print(response.body);
       return TokenResult.fromJson(jsonDecode(response.body));
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }
 
-
   /// untuk register next-step
-  /// get data usernya 
+  /// get data usernya
   static Future<UserModel> getUser(String token, String code) async {
     try {
-      final response = await getRequest("auth/user?member_token=$token&kode=$code");
+      final response =
+          await getRequest("auth/user?member_token=$token&kode=$code");
 
       return userModelFromJson(response.body);
-    }catch (e) {
+    } catch (e) {
       print(e.toString());
-      return UserModel(status: false, message: "Can't Connect to server, please contact admin!");
+      return UserModel(
+          status: false,
+          message: "Can't Connect to server, please contact admin!");
     }
   }
 
@@ -118,19 +123,14 @@ class AuthServices {
       var body = jsonDecode(response.body);
       print(response.body);
 
-      var result = {
-        "status": body['status'],
-        "message":body['message']
-      };
+      var result = {"status": body['status'], "message": body['message']};
 
       return result;
-
-
     } catch (e) {
       print(e);
       var result = {
         "status": false,
-        "message":"failed Please check your connection or call admin!"
+        "message": "failed Please check your connection or call admin!"
       };
       return result;
     }
@@ -140,8 +140,9 @@ class AuthServices {
   static void _changeAuthState(String token) async {
     _controller.sink.add(token);
   }
-  
-  static StreamController<String> _controller = StreamController<String>.broadcast()..addStream(_accessToken);
+
+  static StreamController<String> _controller =
+      StreamController<String>.broadcast()..addStream(_accessToken);
 
   /// baris code ini digunakan untuk menutup stream onAuthStateChanged apabila sudah tidak digunakan.
   static Future<void> dispose() => _controller.close();

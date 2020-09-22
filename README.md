@@ -109,3 +109,11 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Generating Route using AutoRoute
+
+Use the [watch] flag to watch the files' system for edits and rebuild as necessary.
+> flutter packages pub run build_runner watch
+
+if you want the generator to run one time and exits use
+> flutter packages pub run build_runner build

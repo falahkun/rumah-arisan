@@ -2,24 +2,29 @@ part of 'widgets.dart';
 
 class TopBar extends StatelessWidget {
   final String title;
-  final String imageUrl;
+  final Function onTap;
 
-  const TopBar({Key key, this.title, this.imageUrl}) : super(key: key);
+  const TopBar({Key key, this.title, this.onTap}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title ?? "Discover", style: bold.copyWith(
-          fontSize: 23,
-        ),),
-        ClipPath.shape(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6)
+    return Container(
+      height: 69,
+      // color: Colors.blue,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          Positioned(
+              top: 27,
+              left: 20,
+              child: GestureDetector(
+                  onTap: onTap,
+                  child: SvgPicture.asset("assets/icons/back_arrow.svg"))),
+          Align(
+            alignment: Alignment.center,
+            child: Text(title, style: regular.copyWith(fontSize: 18)),
           ),
-          child: (imageUrl == null) ? Image.asset("assets/images/profile_unfilled.png", height: 35, width: 35, fit: BoxFit.cover,) : Image.network(imageUrl, width: 35, height: 35, fit: BoxFit.cover,))
-      ],
+        ],
+      ),
     );
   }
 }

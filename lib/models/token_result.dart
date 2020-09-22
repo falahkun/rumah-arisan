@@ -8,10 +8,9 @@ class TokenResult {
   TokenResult({this.status, this.message, this.data});
 
   factory TokenResult.fromJson(Map<String, dynamic> json) => TokenResult(
-    data: DataResultToken.fromJson(json['data']),
-    message: json['message'],
-    status: json['status']
-  );
+      data: DataResultToken.fromJson(json['data']),
+      message: json['message'],
+      status: json['status']);
 }
 
 class DataResultToken {
@@ -24,7 +23,7 @@ class DataResultToken {
   String statusMember;
   String status;
   String akses;
-  String diblokir;
+  bool diblokir;
   String catatanDiblokir;
   String followers;
   String following;
@@ -32,7 +31,7 @@ class DataResultToken {
 
   DataResultToken(
       {this.akses,
-        this.token,
+      this.token,
       this.catatanDiblokir,
       this.defaultFollower,
       this.diblokir,

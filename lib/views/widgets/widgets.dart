@@ -20,3 +20,6 @@ part 'top_setting.dart';
 part 'arisan_grid.dart';
 part 'cloter_grid_item.dart';
 part 'community_item.dart';
+part 'discuss_bubble.dart';
+part 'message_item.dart';
+part 'menu_item.dart';

@@ -3,7 +3,7 @@ part of 'services.dart';
 class FCMServices {
   static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-  static Future<void> initialize() async {
+  static Future<void> initialize(context) async {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
@@ -37,5 +37,9 @@ class FCMServices {
     _firebaseMessaging.subscribeToTopic(topic);
   }
 
-  static Future<void> unsubscribeTopic() async {}
+  static Future<void> unsubscribeTopic(List<String> topics) async {
+    topics.forEach((element) {
+      _firebaseMessaging.unsubscribeFromTopic(element);
+    });
+  }
 }

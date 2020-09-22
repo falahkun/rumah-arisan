@@ -7,9 +7,9 @@ class Wrapper extends StatelessWidget {
 
     if (token != null) {
       context.bloc<AuthBloc>().add(GetToken(token));
-      context.bloc<CloterBloc>().add(LoadCloter(token));
-      context.bloc<SliderBloc>().add(LoadSlider(token));
-      context.bloc<CommunitiesBloc>().add(LoadCommunities(token));
+      // context.bloc<CloterBloc>().add(LoadCloter(token));
+      // context.bloc<SliderBloc>().add(LoadSlider(token));
+      // context.bloc<CommunitiesBloc>().add(LoadCommunities(token));
       prevPageEvent = GoToMainPage(0);
       context.bloc<PageBloc>().add(prevPageEvent);
     } else {

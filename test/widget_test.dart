@@ -30,6 +30,8 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 
+  test("testing pusher", () async {});
+
   // test("Testing Remote Config", () async {
   //   Map _headers = await RemoteConfigService.getHeaders();
   //   print(_headers.toString());
@@ -45,10 +47,14 @@ void main() {
   // });
 
   test("testing komunitas", () async {
-    CommunityResult _community = await CommunityServices.getCommunity("para-pengejar-tomori-kusunoki-jilid-1", "X7t9lCD96O6q7qkGJuLP8fTf8fWRqjG4W3meN9Htl");
+    CommunityResult _community = await CommunityServices.getCommunity(
+        "para-pengejar-tomori-kusunoki-jilid-1",
+        "X7t9lCD96O6q7qkGJuLP8fTf8fWRqjG4W3meN9Htl");
 
     print(_community.status);
 
     expect(_community.status, true);
   });
+
+  test("Testing Generics Type", () async {});
 }

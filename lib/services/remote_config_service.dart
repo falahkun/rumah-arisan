@@ -5,16 +5,16 @@ class RemoteConfigService {
     try {
       RemoteConfig _remoteConfig = await RemoteConfig.instance;
       await _remoteConfig.setDefaults({'welcome': 'default welcome'});
-      await _remoteConfig.fetch(expiration: const Duration(hours: 1));
+      await _remoteConfig.fetch(expiration: const Duration(hours: 5));
       await _remoteConfig.activateFetched();
       String csrfId = _remoteConfig.getString("csrf_id");
       String csrfToken = _remoteConfig.getString("csrf_token");
 
-      // print(csrfToken + csrfId);
+      print(csrfToken + csrfId);
 
       return {'csrf-id': csrfId ?? '', 'csrf-token': csrfToken ?? ''};
     } catch (e) {
-      print(e);
+      print("message" + e.toString());
       return null;
     }
   }
@@ -23,7 +23,7 @@ class RemoteConfigService {
     try {
       RemoteConfig _remoteConfig = await RemoteConfig.instance;
       await _remoteConfig.setDefaults({'welcome': 'default welcome'});
-      await _remoteConfig.fetch(expiration: const Duration(hours: 1));
+      await _remoteConfig.fetch(expiration: const Duration(hours: 5));
       await _remoteConfig.activateFetched();
       String appVersion = _remoteConfig.getString("app_version");
       return appVersion;
@@ -36,11 +36,13 @@ class RemoteConfigService {
     try {
       RemoteConfig _remoteConfig = await RemoteConfig.instance;
       await _remoteConfig.setDefaults({'welcome': 'default welcome'});
-      await _remoteConfig.fetch(expiration: const Duration(hours: 1));
+      await _remoteConfig.fetch(expiration: const Duration(hours: 5));
       await _remoteConfig.activateFetched();
       String baseUrl = _remoteConfig.getString("base_url");
+      print(baseUrl);
       return baseUrl;
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }

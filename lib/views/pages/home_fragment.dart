@@ -194,11 +194,18 @@ class _HomeFragmentState extends State<HomeFragment>
                 SizedBox(
                   width: 12,
                 ),
-                SvgPicture.asset(
-                  "assets/icons/Bold/Message.svg",
-                  color: (scrollPositions != 0) ? Colors.grey : Colors.white,
-                  height: 22,
-                  width: 22,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.messagesPage,
+                        arguments: MessagesPageArguments(
+                            memberToken: widget.tokenResult.data.token));
+                  },
+                  child: SvgPicture.asset(
+                    "assets/icons/Bold/Message.svg",
+                    color: (scrollPositions != 0) ? Colors.grey : Colors.white,
+                    height: 22,
+                    width: 22,
+                  ),
                 ),
                 SizedBox(
                   width: 12,

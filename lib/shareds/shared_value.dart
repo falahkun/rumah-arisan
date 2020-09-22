@@ -32,3 +32,29 @@ String expandText(String text, {bool isExpand = false, int maxLength = 50}) {
     }
   }
 }
+
+String placeHolderImageUrl(String placeName) {
+  return "https://ui-avatars.com/api/?background=2C98F0&color=fff&name=$placeName";
+}
+
+String lorem =
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ";
+
+String gettingFirstChar(String title) {
+  var splittedTitle = title.split(" ");
+  if (splittedTitle.length > 1) {
+    String firstWord = splittedTitle.first;
+    return firstWord.substring(0, 1);
+  } else {
+    return title.substring(0, 1);
+  }
+}
+
+bool isEnteredTitle(String title) {
+  var splittedTitle = title.split(" ");
+  if (splittedTitle.length > 1) {
+    return true;
+  } else {
+    return false;
+  }
+}

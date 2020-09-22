@@ -9,6 +9,13 @@ import 'package:rumah_arisan/views/pages/pages.dart';
     MaterialRoute(page: CloterDetail),
     MaterialRoute(page: SettingPage),
     MaterialRoute(page: CommunityPage),
+    MaterialRoute(page: CommunityDiscussPage),
+    MaterialRoute(
+      page: MessagesPage,
+    ),
+    MaterialRoute(page: ChatPage),
+    MaterialRoute(page: MyCommunitiesPage),
+    MaterialRoute(page: CreateCommunity),
   ],
 )
 class $Router {}

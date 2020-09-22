@@ -13,13 +13,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is GetToken) {
       TokenResult _tokenResult = await AuthServices.getTokenResult(event.token);
+      print("token result out");
       if (_tokenResult != null && _tokenResult.status) {
         TokenResult newTokenResult = _tokenResult;
         newTokenResult.data.token = event.token;
+        await FCMServices.subscribeTopic(event.token);
+        print("token result int");
         yield OnLoadedToken(newTokenResult);
       } else if (_tokenResult != null && !_tokenResult.status) {
-        yield OnUnauthorizedToken("You're Logged On");
-      } 
+        print("token result is false");
+        yield OnUnauthorizedToken("You're session removed");
+      }
     } else if (event is SignOut) {
       AuthServices.removeSession();
     }

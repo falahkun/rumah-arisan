@@ -19,12 +19,22 @@ class Routes {
   static const String cloterDetail = '/cloter-detail';
   static const String settingPage = '/setting-page';
   static const String communityPage = '/community-page';
+  static const String communityDiscussPage = '/community-discuss-page';
+  static const String messagesPage = '/messages-page';
+  static const String chatPage = '/chat-page';
+  static const String myCommunitiesPage = '/my-communities-page';
+  static const String createCommunity = '/create-community';
   static const all = <String>{
     wrapper,
     mainPage,
     cloterDetail,
     settingPage,
     communityPage,
+    communityDiscussPage,
+    messagesPage,
+    chatPage,
+    myCommunitiesPage,
+    createCommunity,
   };
 }
 
@@ -37,6 +47,11 @@ class Router extends RouterBase {
     RouteDef(Routes.cloterDetail, page: CloterDetail),
     RouteDef(Routes.settingPage, page: SettingPage),
     RouteDef(Routes.communityPage, page: CommunityPage),
+    RouteDef(Routes.communityDiscussPage, page: CommunityDiscussPage),
+    RouteDef(Routes.messagesPage, page: MessagesPage),
+    RouteDef(Routes.chatPage, page: ChatPage),
+    RouteDef(Routes.myCommunitiesPage, page: MyCommunitiesPage),
+    RouteDef(Routes.createCommunity, page: CreateCommunity),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -98,6 +113,69 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    CommunityDiscussPage: (data) {
+      final args = data.getArgs<CommunityDiscussPageArguments>(
+        orElse: () => CommunityDiscussPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => CommunityDiscussPage(
+          key: args.key,
+          slug: args.slug,
+          memberToken: args.memberToken,
+        ),
+        settings: data,
+      );
+    },
+    MessagesPage: (data) {
+      final args = data.getArgs<MessagesPageArguments>(
+        orElse: () => MessagesPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MessagesPage(
+          key: args.key,
+          memberToken: args.memberToken,
+        ),
+        settings: data,
+      );
+    },
+    ChatPage: (data) {
+      final args = data.getArgs<ChatPageArguments>(
+        orElse: () => ChatPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ChatPage(
+          key: args.key,
+          memberToken: args.memberToken,
+          id: args.id,
+          token: args.token,
+        ),
+        settings: data,
+      );
+    },
+    MyCommunitiesPage: (data) {
+      final args = data.getArgs<MyCommunitiesPageArguments>(
+        orElse: () => MyCommunitiesPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MyCommunitiesPage(
+          key: args.key,
+          memberToken: args.memberToken,
+        ),
+        settings: data,
+      );
+    },
+    CreateCommunity: (data) {
+      final args = data.getArgs<CreateCommunityArguments>(
+        orElse: () => CreateCommunityArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => CreateCommunity(
+          key: args.key,
+          memberToken: args.memberToken,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -135,4 +213,42 @@ class CommunityPageArguments {
   final String slug;
   final String memberToken;
   CommunityPageArguments({this.key, this.slug, this.memberToken});
+}
+
+/// CommunityDiscussPage arguments holder class
+class CommunityDiscussPageArguments {
+  final Key key;
+  final String slug;
+  final String memberToken;
+  CommunityDiscussPageArguments({this.key, this.slug, this.memberToken});
+}
+
+/// MessagesPage arguments holder class
+class MessagesPageArguments {
+  final Key key;
+  final String memberToken;
+  MessagesPageArguments({this.key, this.memberToken});
+}
+
+/// ChatPage arguments holder class
+class ChatPageArguments {
+  final Key key;
+  final String memberToken;
+  final String id;
+  final String token;
+  ChatPageArguments({this.key, this.memberToken, this.id, this.token});
+}
+
+/// MyCommunitiesPage arguments holder class
+class MyCommunitiesPageArguments {
+  final Key key;
+  final String memberToken;
+  MyCommunitiesPageArguments({this.key, this.memberToken});
+}
+
+/// CreateCommunity arguments holder class
+class CreateCommunityArguments {
+  final Key key;
+  final String memberToken;
+  CreateCommunityArguments({this.key, this.memberToken});
 }

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_pusher_client/flutter_pusher.dart';
 // import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,25 +24,20 @@ part 'unilink_services.dart';
 part 'subdistrict_services.dart';
 part 'category_services.dart';
 part 'community_services.dart';
+part 'chat_services.dart';
+part 'pusher_services.dart';
 
 /// ini adalah method untuk melakukan semua request yang akan digunakan nantinya
 Future<http.Response> postRequest(String subUrl,
-    {Map<String, String> body, String memberToken}) async {
+    {Map<String, dynamic> body, String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
-  // print("$baseUrl - $headers");
-  http.Request rq = http.Request('POST', Uri.parse("$baseUrl/$subUrl"))
-    ..bodyFields = body;
-  rq.headers.addAll({
+  return await http.post("$baseUrl/$subUrl", body: body, headers: {
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
     'member-token': memberToken ?? '',
   });
-
-  // rq.bodyFields.addAll(body);
-  http.StreamedResponse streamedResponse = await http.Client().send(rq);
-  return http.Response.fromStream(streamedResponse);
 }
 
 Future<http.Response> getRequest(String subUrl, {String memberToken}) async {
@@ -49,15 +45,12 @@ Future<http.Response> getRequest(String subUrl, {String memberToken}) async {
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
-  http.Request rq = http.Request('GET', Uri.parse("$baseUrl/$subUrl"));
-  rq.headers.addAll({
+  return await http.get("$baseUrl/$subUrl", headers: {
     'csrf-id': headers['csrf-id'],
     'csrf-token': headers['csrf-token'],
-    'member-token': memberToken ?? ''
+    'member-token': memberToken ?? '',
+    HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
   });
-
-  http.StreamedResponse streamedResponse = await http.Client().send(rq);
-  return http.Response.fromStream(streamedResponse);
 }
 
 Future<http.Response> putRequest(String subUrl,
@@ -66,6 +59,7 @@ Future<http.Response> putRequest(String subUrl,
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
+  await Future.delayed(Duration(seconds: 2));
   http.Request rq = http.Request('PUT', Uri.parse("$baseUrl/$subUrl"))
     ..bodyFields = body;
   rq.headers.addAll({
@@ -85,6 +79,7 @@ Future<http.Response> deleteRequest(String subUrl,
   var baseUrl = await RemoteConfigService.getBaseUrl();
 
   // print("$baseUrl - $headers");
+  await Future.delayed(Duration(seconds: 2));
   http.Request rq = http.Request('DELETE', Uri.parse("$baseUrl/$subUrl"))
     ..bodyFields = body;
   rq.headers.addAll({

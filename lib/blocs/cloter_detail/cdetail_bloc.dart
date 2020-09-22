@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rumah_arisan/models/models.dart';
@@ -12,16 +11,19 @@ class CdetailBloc extends Bloc<CdetailEvent, CdetailState> {
 
   @override
   Stream<CdetailState> mapEventToState(CdetailEvent event) async* {
-    if(event is LoadCDetail) {
-      CloterDetailResult cloterResult = await CloterServices.getCloter(event.memberToken, slug: event.slug);
+    if (event is LoadCDetail) {
+      CloterDetailResult cloterResult =
+          await CloterServices.getCloter(event.memberToken, slug: event.slug);
       print(cloterResult.message);
       print(cloterResult.status);
       print(cloterResult.toJson());
-      if(cloterResult.status) {
+      if (cloterResult.status) {
         yield OnLoadedCdetail(cloterResult);
-      }else {
+      } else {
         yield OnCDetailError(cloterResult);
       }
+    } else {
+      yield OnInitialCDetail();
     }
   }
 }

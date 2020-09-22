@@ -10,6 +10,7 @@ class CommunityServices {
 
       return communityResultFromJson(response.body);
     } catch (e) {
+      print(e.toString());
       return CommunityResult(status: false, message: "can't Reach Server");
     }
   }
@@ -54,6 +55,65 @@ class CommunityServices {
     } catch (e) {
       print(e.toString());
       return AuthResult(status: false, message: "Can't Connect To Server");
+    }
+  }
+
+  static Future<CommunityDiscuss> fetchDiscussions(
+      String slug, String memberToken) async {
+    try {
+      final response = await getRequest("komunitas/diskusi?slug=$slug");
+
+      return communityDiscussFromJson(response.body);
+    } catch (e) {
+      return CommunityDiscuss(
+          status: false, message: "Galat!, tidak bisa konek ke server");
+    }
+  }
+
+  static Future<AuthResult> postComment(String slug, String text,
+      {String discussId, String memberToken}) async {
+    try {
+      final response = await postRequest("komunitas/diskusi",
+          memberToken: memberToken,
+          body: {
+            "diskusi_id": discussId ?? "",
+            "slug": slug,
+            "teks": text,
+          });
+
+      var data = jsonDecode(response.body);
+      return AuthResult(status: data['status'], message: data['message']);
+    } catch (e) {
+      print(e.toString());
+      return AuthResult(status: false, message: "can't Connect To server");
+    }
+  }
+
+  static Future<CommunityResults> fetchMemberCommunities(
+      String memberToken) async {
+    try {
+      final response =
+          await getRequest("member-page/komunitas", memberToken: memberToken);
+
+      return communityResultsFromJson(response.body);
+    } catch (e) {
+      return CommunityResults(
+          status: false, message: "can't fetching data from server");
+    }
+  }
+
+  static Future<AuthResult> createCommunity(
+      String memberToken, CommunityData data) async {
+    try {
+      final response = await postRequest("member-page/komunitas",
+          memberToken: memberToken, body: data.toJson());
+      var convertedData = jsonDecode(response.body);
+      return AuthResult(
+          status: convertedData['status'], message: convertedData['message']);
+    } catch (e) {
+      print(e.toString());
+      return AuthResult(
+          status: false, message: "Can't getting Result from server");
     }
   }
 }
