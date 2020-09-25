@@ -65,11 +65,12 @@ class CommunityData {
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? "" : id,
+        "komunitas_id": id == null ? "" : id,
         "foto": foto == null ? "" : foto,
         "banner": banner == null ? "" : banner,
         "nama": nama == null ? "" : nama,
         "slug": slug == null ? "" : slug,
-        "private": private == null ? "" : private,
+        "private": private == null ? private ? "1" : "0" : private.toString(),
         "catatan": catatan == null ? "" : catatan,
         "deskripsi": deskripsi == null ? "" : deskripsi,
         "total_member": totalMember == null ? "" : totalMember,

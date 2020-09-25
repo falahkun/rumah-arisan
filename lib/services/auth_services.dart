@@ -74,7 +74,7 @@ class AuthServices {
 
   /// method ini digunakan untuk meremove session yang tersimpan,
   /// bisa juga digunakan untuk logout.
-  static Future removeSession() async {
+  static Future<void> removeSession() async {
     SharedPreferences _sharedPreferences =
         await SharedPreferences.getInstance();
     await FCMServices.unsubscribeTopic([_sharedPreferences.getString('token')]);

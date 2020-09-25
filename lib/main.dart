@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(create: (_) => MessageBloc(OnInitialMessage())),
           BlocProvider(create: (_) => MCBloc(OnInitialMC())),
+          BlocProvider(create: (_) => MOCBloc(OnInitialMOC())),
         ],
         child: FutureBuilder(
             future: Firebase.initializeApp(),
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
-                // home: TestingPage(),
+                // home: CreateCloter(),
                 initialRoute: "/",
                 onGenerateRoute: Router().onGenerateRoute,
               );

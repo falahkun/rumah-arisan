@@ -2,19 +2,37 @@ part of 'pages.dart';
 
 class CreateCommunity extends StatefulWidget {
   final String memberToken;
+  final CommunityData community;
 
-  const CreateCommunity({Key key, this.memberToken}) : super(key: key);
+  const CreateCommunity({Key key, this.memberToken, this.community})
+      : super(key: key);
   @override
   _CreateCommunityState createState() => _CreateCommunityState();
 }
 
 class _CreateCommunityState extends State<CreateCommunity> {
   File imageProfile, imageBanner;
+  String imageN, imageBannerN;
   bool isPrivate = false;
   bool isProcessing = false;
   TextEditingController _title = TextEditingController();
   TextEditingController _description = TextEditingController();
   TextEditingController _note = TextEditingController();
+
+  @override
+  initState() {
+    super.initState();
+    if (widget.community != null) {
+      setState(() {
+        _title.text = widget.community.nama;
+        _description.text = widget.community.deskripsi;
+        _note.text = widget.community.catatan;
+        // isPrivate = widget.community.private;
+        imageN = widget.community.foto;
+        imageBannerN = widget.community.banner;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +44,9 @@ class _CreateCommunityState extends State<CreateCommunity> {
             onTap: () {
               Navigator.pop(context);
             },
-            title: "Create\nCommunity",
+            title: widget.community != null
+                ? "Update\nCommunity"
+                : "Create\nCommunity",
           ),
           SizedBox(height: 20),
           Column(
@@ -36,6 +56,18 @@ class _CreateCommunityState extends State<CreateCommunity> {
                 children: [
                   if (imageProfile != null)
                     Image.file(imageProfile, width: 80, height: 80)
+                  else if (imageN != null)
+                    GestureDetector(
+                        onTap: () async {
+                          File _pickedImage = await pickImage();
+                          setState(() {
+                            if (_pickedImage != null) {
+                              imageProfile = _pickedImage;
+                              imageN = null;
+                            }
+                          });
+                        },
+                        child: Image.network(imageN, width: 80, height: 80))
                   else
                     Container(
                         child: Center(
@@ -46,6 +78,8 @@ class _CreateCommunityState extends State<CreateCommunity> {
                             setState(() {
                               if (_pickedImage != null) {
                                 imageProfile = _pickedImage;
+
+                                imageN = null;
                               }
                             });
                           },
@@ -57,6 +91,21 @@ class _CreateCommunityState extends State<CreateCommunity> {
                     Image.file(imageBanner,
                         width: MediaQuery.of(context).size.width / 3,
                         height: 433 / 3)
+                  else if (imageBannerN != null)
+                    GestureDetector(
+                      onTap: () async {
+                        File _pickedImage = await pickImage();
+                        setState(() {
+                          if (_pickedImage != null) {
+                            imageBanner = _pickedImage;
+                            imageBannerN = null;
+                          }
+                        });
+                      },
+                      child: Image.network(imageBannerN,
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: 433 / 3),
+                    )
                   else
                     Container(
                       width: MediaQuery.of(context).size.width / 3,
@@ -70,6 +119,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
                           setState(() {
                             if (_pickedImage != null) {
                               imageBanner = _pickedImage;
+                              imageBannerN = null;
                             }
                           });
                         },
@@ -143,21 +193,13 @@ class _CreateCommunityState extends State<CreateCommunity> {
                   controlAffinity: ListTileControlAffinity.leading,
                 ),
                 GestureDetector(
-                  onTap: (_title.text.isEmpty && _description.text.isEmpty)
-                      ? () {
-                          Flushbar(
-                            message: "Title & description can't be null!",
-                            animationDuration: Duration(seconds: 2),
-                            duration: Duration(seconds: 2),
-                            backgroundColor: Color(0xFFFF1267),
-                            flushbarPosition: FlushbarPosition.TOP,
-                          ).show(context);
-                        }
-                      : () async {
+                  onTap: (widget.community != null)
+                      ? () async {
                           setState(() {
                             isProcessing = true;
                           });
                           CommunityData _communityData = CommunityData();
+                          _communityData.id = widget.community.id;
                           _communityData.nama = _title.text.trim();
                           _communityData.catatan = _note.text.trim();
                           _communityData.deskripsi = _description.text.trim();
@@ -167,8 +209,9 @@ class _CreateCommunityState extends State<CreateCommunity> {
                           _communityData.foto = (imageProfile != null)
                               ? await fileToBase64(imageProfile)
                               : "";
+                          // _communityData.private = isPrivate;
 
-                          await CommunityServices.createCommunity(
+                          await CommunityServices.updateCommunity(
                                   widget.memberToken, _communityData)
                               .then((value) {
                             if (value.status) {
@@ -189,20 +232,118 @@ class _CreateCommunityState extends State<CreateCommunity> {
                             }
                           });
                           setState(() {});
-                        },
+                        }
+                      : (_title.text.isEmpty && _description.text.isEmpty)
+                          ? () {
+                              Flushbar(
+                                message: "Title & description can't be null!",
+                                animationDuration: Duration(seconds: 2),
+                                duration: Duration(seconds: 2),
+                                backgroundColor: Color(0xFFFF1267),
+                                flushbarPosition: FlushbarPosition.TOP,
+                              ).show(context);
+                            }
+                          : () async {
+                              setState(() {
+                                isProcessing = true;
+                              });
+                              CommunityData _communityData = CommunityData();
+                              _communityData.nama = _title.text.trim();
+                              _communityData.catatan = _note.text.trim();
+                              _communityData.deskripsi =
+                                  _description.text.trim();
+                              _communityData.banner = (imageBanner != null)
+                                  ? await fileToBase64(imageBanner)
+                                  : "";
+                              _communityData.foto = (imageProfile != null)
+                                  ? await fileToBase64(imageProfile)
+                                  : "";
+
+                              _communityData.private = isPrivate;
+
+                              await CommunityServices.createCommunity(
+                                      widget.memberToken, _communityData)
+                                  .then((value) {
+                                if (value.status) {
+                                  isProcessing = false;
+                                  Navigator.pop(context);
+                                  context.bloc<MCBloc>().add(
+                                      FetchMCommunities(widget.memberToken));
+                                } else {
+                                  isProcessing = false;
+                                  Flushbar(
+                                    message: value.message,
+                                    animationDuration: Duration(seconds: 2),
+                                    duration: Duration(seconds: 2),
+                                    backgroundColor: Color(0xFFFF1267),
+                                    flushbarPosition: FlushbarPosition.TOP,
+                                  ).show(context);
+                                }
+                              });
+                              setState(() {});
+                            },
                   child: Container(
                     height: 45,
                     width: 240,
                     child: Center(
-                        child: Text("Create your own community",
+                        child: Text(
+                            widget.community == null
+                                ? "Create your own community"
+                                : "Update your community",
                             style: regular.copyWith(
-                                fontSize: 13, color: Colors.white))),
+                                fontSize: 13,
+                                color: widget.community == null
+                                    ? Colors.white
+                                    : Colors.black))),
                     decoration: BoxDecoration(
-                      color: Color(0xFF2C98F0),
+                      color: widget.community == null
+                          ? Color(0xFF2C98F0)
+                          : Colors.amber,
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
                 ),
+                SizedBox(height: 15),
+                if (widget.community != null)
+                  GestureDetector(
+                    onTap: () async {
+                      setState(() {
+                        isProcessing = true;
+                      });
+                      await CommunityServices.deleteCommunity(
+                              widget.memberToken, widget.community.id)
+                          .then((value) {
+                        if (value.status) {
+                          isProcessing = false;
+                          Navigator.pop(context);
+                          context
+                              .bloc<MCBloc>()
+                              .add(FetchMCommunities(widget.memberToken));
+                        } else {
+                          isProcessing = false;
+                          Flushbar(
+                            message: value.message,
+                            animationDuration: Duration(seconds: 2),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Color(0xFFFF1267),
+                            flushbarPosition: FlushbarPosition.TOP,
+                          ).show(context);
+                        }
+                      });
+                    },
+                    child: Container(
+                      height: 45,
+                      width: 240,
+                      child: Center(
+                          child: Text("Delete Community",
+                              style: regular.copyWith(
+                                  fontSize: 13, color: Colors.white))),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFD6585),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

@@ -116,4 +116,35 @@ class CommunityServices {
           status: false, message: "Can't getting Result from server");
     }
   }
+
+  static Future<AuthResult> updateCommunity(
+      String memberToken, CommunityData data) async {
+    try {
+      final response = await putRequest("member-page/komunitas",
+          memberToken: memberToken, body: data.toJson());
+      print(data.private);
+      var convertedData = jsonDecode(response.body);
+      return AuthResult(
+          status: convertedData['status'], message: convertedData['message']);
+    } catch (e) {
+      print(e.toString());
+      return AuthResult(
+          status: false, message: "Can't getting Result from server");
+    }
+  }
+
+  static Future<AuthResult> deleteCommunity(
+      String memberToken, String komunitasId) async {
+    try {
+      final response = await deleteRequest("member-page/komunitas",
+          memberToken: memberToken, body: {"komunitas_id": komunitasId ?? ""});
+      var convertedData = jsonDecode(response.body);
+      return AuthResult(
+          status: convertedData['status'], message: convertedData['message']);
+    } catch (e) {
+      print(e.toString());
+      return AuthResult(
+          status: false, message: "Can't getting Result from server");
+    }
+  }
 }

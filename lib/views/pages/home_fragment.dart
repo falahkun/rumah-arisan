@@ -181,7 +181,17 @@ class _HomeFragmentState extends State<HomeFragment>
                 SizedBox(
                   width: 15,
                 ),
-                Expanded(child: SearchBar()),
+                Expanded(
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.searchPage,
+                              arguments: SearchPageArguments(
+                                  memberToken: widget.tokenResult.data.token,
+                                  query: "",
+                                  slug: "",
+                                  currentIndex: 0));
+                        },
+                        child: Hero(tag: "search-bar", child: SearchBar()))),
                 SizedBox(
                   width: 15,
                 ),

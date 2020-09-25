@@ -42,3 +42,6 @@ part 'messages_page.dart';
 part 'chat_page.dart';
 part 'mycommunities_page.dart';
 part 'create_community.dart';
+part 'search_page.dart';
+part 'my_cloter.dart';
+part 'create_cloter.dart';

@@ -85,9 +85,10 @@ class _SettingPageState extends State<SettingPage> {
                                     },
                                     child: Text("Cancel")),
                                 FlatButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       Navigator.pop(context);
-                                      AuthServices.removeSession();
+                                      await AuthServices.removeSession();
+                                      context.bloc<AuthBloc>().add(SignOut());
                                       Navigator.pushReplacementNamed(
                                           context, "/");
                                     },

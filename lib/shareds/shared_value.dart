@@ -58,3 +58,8 @@ bool isEnteredTitle(String title) {
     return false;
   }
 }
+
+String priceFormating(String price) {
+  var f = NumberFormat("#,##0", "en_US");
+  return "Rp " + f.format(int.parse(price ?? "0"));
+}

@@ -21,7 +21,11 @@ class TopBar extends StatelessWidget {
                   child: SvgPicture.asset("assets/icons/back_arrow.svg"))),
           Align(
             alignment: Alignment.center,
-            child: Text(title, style: regular.copyWith(fontSize: 18)),
+            child: Text(
+              title,
+              style: regular.copyWith(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

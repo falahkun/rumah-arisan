@@ -26,6 +26,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     } else if (event is SignOut) {
       AuthServices.removeSession();
+      yield OnInitialAuth();
+    } else {
+      yield OnInitialAuth();
     }
   }
 }

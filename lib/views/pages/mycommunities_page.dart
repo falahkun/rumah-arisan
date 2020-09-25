@@ -43,14 +43,24 @@ class _MyCommunitiesPageState extends State<MyCommunitiesPage> {
                         padding: const EdgeInsets.only(
                           bottom: 15.0,
                         ),
-                        child: CommunityItem(
-                          title: item.nama,
-                          urlImage: item.foto ?? placeHolderImageUrl(item.nama),
-                          isLiked: index.isEven ? true : false,
-                          liked: (index + 1) * 100,
-                          privacy: !item.private ? "Public" : "Private",
-                          rating: 2,
-                          reactedPeople: 2,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.createCommunity,
+                                arguments: CreateCommunityArguments(
+                                  community: item,
+                                  memberToken: widget.memberToken,
+                                ));
+                          },
+                          child: CommunityItem(
+                            title: item.nama,
+                            urlImage:
+                                item.foto ?? placeHolderImageUrl(item.nama),
+                            isLiked: index.isEven ? true : false,
+                            liked: (index + 1) * 100,
+                            privacy: !item.private ? "Public" : "Private",
+                            rating: 2,
+                            reactedPeople: 2,
+                          ),
                         ),
                       );
                     }))

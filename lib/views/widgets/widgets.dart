@@ -23,3 +23,5 @@ part 'community_item.dart';
 part 'discuss_bubble.dart';
 part 'message_item.dart';
 part 'menu_item.dart';
+part 'arisan_horizontal_item.dart';
+part 'message_error_page.dart';

@@ -40,6 +40,19 @@ Future<http.Response> postRequest(String subUrl,
   });
 }
 
+Future<http.Response> putRequest(String subUrl,
+    {Map<String, dynamic> body, String memberToken}) async {
+  var headers = await RemoteConfigService.getHeaders();
+  var baseUrl = await RemoteConfigService.getBaseUrl();
+
+  return await http.put("$baseUrl/$subUrl", body: body, headers: {
+    'csrf-id': headers['csrf-id'],
+    'csrf-token': headers['csrf-token'],
+    'member-token': memberToken ?? '',
+    HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
+  });
+}
+
 Future<http.Response> getRequest(String subUrl, {String memberToken}) async {
   var headers = await RemoteConfigService.getHeaders();
   var baseUrl = await RemoteConfigService.getBaseUrl();
@@ -53,25 +66,25 @@ Future<http.Response> getRequest(String subUrl, {String memberToken}) async {
   });
 }
 
-Future<http.Response> putRequest(String subUrl,
-    {Map<String, String> body, String memberToken}) async {
-  var headers = await RemoteConfigService.getHeaders();
-  var baseUrl = await RemoteConfigService.getBaseUrl();
+// Future<http.Response> putRequest(String subUrl,
+//     {Map<String, String> body, String memberToken}) async {
+//   var headers = await RemoteConfigService.getHeaders();
+//   var baseUrl = await RemoteConfigService.getBaseUrl();
 
-  // print("$baseUrl - $headers");
-  await Future.delayed(Duration(seconds: 2));
-  http.Request rq = http.Request('PUT', Uri.parse("$baseUrl/$subUrl"))
-    ..bodyFields = body;
-  rq.headers.addAll({
-    'csrf-id': headers['csrf-id'],
-    'csrf-token': headers['csrf-token'],
-    'member-token': memberToken ?? ''
-  });
+//   // print("$baseUrl - $headers");
+//   await Future.delayed(Duration(seconds: 2));
+//   http.Request rq = http.Request('PUT', Uri.parse("$baseUrl/$subUrl"))
+//     ..bodyFields = body;
+//   rq.headers.addAll({
+//     'csrf-id': headers['csrf-id'],
+//     'csrf-token': headers['csrf-token'],
+//     'member-token': memberToken ?? ''
+//   });
 
-  // rq.bodyFields.addAll(body);
-  http.StreamedResponse streamedResponse = await http.Client().send(rq);
-  return http.Response.fromStream(streamedResponse);
-}
+//   // rq.bodyFields.addAll(body);
+//   http.StreamedResponse streamedResponse = await http.Client().send(rq);
+//   return http.Response.fromStream(streamedResponse);
+// }
 
 Future<http.Response> deleteRequest(String subUrl,
     {Map<String, String> body, String memberToken}) async {

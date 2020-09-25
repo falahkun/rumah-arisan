@@ -24,6 +24,9 @@ class Routes {
   static const String chatPage = '/chat-page';
   static const String myCommunitiesPage = '/my-communities-page';
   static const String createCommunity = '/create-community';
+  static const String searchPage = '/search-page';
+  static const String myCloter = '/my-cloter';
+  static const String createCloter = '/create-cloter';
   static const all = <String>{
     wrapper,
     mainPage,
@@ -35,6 +38,9 @@ class Routes {
     chatPage,
     myCommunitiesPage,
     createCommunity,
+    searchPage,
+    myCloter,
+    createCloter,
   };
 }
 
@@ -52,6 +58,9 @@ class Router extends RouterBase {
     RouteDef(Routes.chatPage, page: ChatPage),
     RouteDef(Routes.myCommunitiesPage, page: MyCommunitiesPage),
     RouteDef(Routes.createCommunity, page: CreateCommunity),
+    RouteDef(Routes.searchPage, page: SearchPage),
+    RouteDef(Routes.myCloter, page: MyCloter),
+    RouteDef(Routes.createCloter, page: CreateCloter),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -172,6 +181,45 @@ class Router extends RouterBase {
         builder: (context) => CreateCommunity(
           key: args.key,
           memberToken: args.memberToken,
+          community: args.community,
+        ),
+        settings: data,
+      );
+    },
+    SearchPage: (data) {
+      final args = data.getArgs<SearchPageArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SearchPage(
+          key: args.key,
+          query: args.query,
+          currentIndex: args.currentIndex,
+          slug: args.slug,
+          memberToken: args.memberToken,
+        ),
+        settings: data,
+      );
+    },
+    MyCloter: (data) {
+      final args = data.getArgs<MyCloterArguments>(
+        orElse: () => MyCloterArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MyCloter(
+          key: args.key,
+          memberToken: args.memberToken,
+        ),
+        settings: data,
+      );
+    },
+    CreateCloter: (data) {
+      final args = data.getArgs<CreateCloterArguments>(
+        orElse: () => CreateCloterArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => CreateCloter(
+          key: args.key,
+          memberToken: args.memberToken,
+          cloter: args.cloter,
         ),
         settings: data,
       );
@@ -250,5 +298,36 @@ class MyCommunitiesPageArguments {
 class CreateCommunityArguments {
   final Key key;
   final String memberToken;
-  CreateCommunityArguments({this.key, this.memberToken});
+  final CommunityData community;
+  CreateCommunityArguments({this.key, this.memberToken, this.community});
+}
+
+/// SearchPage arguments holder class
+class SearchPageArguments {
+  final Key key;
+  final String query;
+  final int currentIndex;
+  final String slug;
+  final String memberToken;
+  SearchPageArguments(
+      {this.key,
+      this.query = "",
+      this.currentIndex = 0,
+      this.slug = "",
+      @required this.memberToken});
+}
+
+/// MyCloter arguments holder class
+class MyCloterArguments {
+  final Key key;
+  final String memberToken;
+  MyCloterArguments({this.key, this.memberToken});
+}
+
+/// CreateCloter arguments holder class
+class CreateCloterArguments {
+  final Key key;
+  final String memberToken;
+  final CloterData cloter;
+  CreateCloterArguments({this.key, this.memberToken, this.cloter});
 }
