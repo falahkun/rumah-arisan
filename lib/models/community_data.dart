@@ -70,7 +70,7 @@ class CommunityData {
         "banner": banner == null ? "" : banner,
         "nama": nama == null ? "" : nama,
         "slug": slug == null ? "" : slug,
-        "private": private == null ? private ? "1" : "0" : private.toString(),
+        "private": private ? "1" : "0",
         "catatan": catatan == null ? "" : catatan,
         "deskripsi": deskripsi == null ? "" : deskripsi,
         "total_member": totalMember == null ? "" : totalMember,

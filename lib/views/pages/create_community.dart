@@ -27,7 +27,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
         _title.text = widget.community.nama;
         _description.text = widget.community.deskripsi;
         _note.text = widget.community.catatan;
-        // isPrivate = widget.community.private;
+        isPrivate = widget.community.private;
         imageN = widget.community.foto;
         imageBannerN = widget.community.banner;
       });
@@ -209,7 +209,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
                           _communityData.foto = (imageProfile != null)
                               ? await fileToBase64(imageProfile)
                               : "";
-                          // _communityData.private = isPrivate;
+                          _communityData.private = isPrivate;
 
                           await CommunityServices.updateCommunity(
                                   widget.memberToken, _communityData)
@@ -330,6 +330,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
                           ).show(context);
                         }
                       });
+                      setState(() {});
                     },
                     child: Container(
                       height: 45,

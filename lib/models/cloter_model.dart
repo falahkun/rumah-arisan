@@ -116,6 +116,7 @@ class CloterData {
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? "" : id,
+        "cloter_id": id == null ? "" : id,
         "foto": foto == null ? null : foto,
         "nama": nama == null ? "" : nama,
         "slug": slug == null ? "" : slug,
@@ -136,7 +137,7 @@ class CloterData {
         "joined": joined == null ? "" : joined,
         "token": token == null ? "" : token,
         "anggota": anggota == null ? "" : anggota,
-        "deskripsi": deskripsi == null ? "" : deskripsi
+        "deskripsi": deskripsi == null ? "" : deskripsi,
       };
 }
 

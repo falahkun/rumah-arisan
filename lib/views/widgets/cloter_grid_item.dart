@@ -22,7 +22,7 @@ class CloterGridItem extends StatelessWidget {
               ));
         },
         child: Container(
-          height: 250,
+          height: 250 + 10.0,
           width: 150,
           decoration: BoxDecoration(
               color: Colors.white,

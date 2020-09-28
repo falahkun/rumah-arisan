@@ -21,6 +21,21 @@ class _CreateCloterState extends State<CreateCloter> {
   TextEditingController _quota = TextEditingController();
 
   @override
+  initState() {
+    super.initState();
+    if (widget.cloter != null)
+      setState(() {
+        imageN = widget.cloter.foto;
+        isPrivate = widget.cloter.private;
+        _title.text = widget.cloter.nama;
+        _description.text = widget.cloter.deskripsi;
+        _quota.text = widget.cloter.kuota;
+        arisanTypeSelected = widget.cloter.tipe;
+        arisanSystemSelected = widget.cloter.sistem;
+      });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -136,15 +151,10 @@ class _CreateCloterState extends State<CreateCloter> {
                               style: regular.copyWith(
                                   fontSize: 14,
                                   color: Colors.black.withOpacity(0.65))),
-                          items: _arisanType
+                          items: ["uang", "barang"]
                               .map((e) => DropdownMenuItem(
-                                    value: e.value,
-                                    // onTap: () {
-                                    //   setState(() {
-                                    //     arisanTypeSelected = e;
-                                    //   });
-                                    // },
-                                    child: Text(e.title,
+                                    value: e,
+                                    child: Text(e,
                                         style: regular.copyWith(fontSize: 14)),
                                   ))
                               .toList(),
@@ -173,15 +183,10 @@ class _CreateCloterState extends State<CreateCloter> {
                               style: regular.copyWith(
                                   fontSize: 14,
                                   color: Colors.black.withOpacity(0.65))),
-                          items: _arisanSystem
+                          items: ["kocok", "menurun"]
                               .map((e) => DropdownMenuItem(
-                                    value: e.value,
-                                    // onTap: () {
-                                    //   setState(() {
-                                    //     arisanTypeSelected = e;
-                                    //   });
-                                    // },
-                                    child: Text(e.title,
+                                    value: e,
+                                    child: Text(e,
                                         style: regular.copyWith(fontSize: 14)),
                                   ))
                               .toList(),
@@ -212,6 +217,7 @@ class _CreateCloterState extends State<CreateCloter> {
                             setState(() {
                               isProcessing = true;
                             });
+                            print("arisan type = $arisanTypeSelected");
                             CloterData _cloterData = CloterData();
                             _cloterData.id = widget.cloter.id;
                             _cloterData.nama = _title.text.trim();
@@ -221,6 +227,10 @@ class _CreateCloterState extends State<CreateCloter> {
                                 ? await fileToBase64(imageProfile)
                                 : "";
                             _cloterData.private = isPrivate;
+                            _cloterData.tipe = arisanTypeSelected;
+                            _cloterData.sistem = arisanSystemSelected;
+
+                            print(_cloterData.toJson());
 
                             await CloterServices.updateCloter(
                                     widget.memberToken, _cloterData)
@@ -229,8 +239,8 @@ class _CreateCloterState extends State<CreateCloter> {
                                 isProcessing = false;
                                 Navigator.pop(context);
                                 context
-                                    .bloc<MCBloc>()
-                                    .add(FetchMCommunities(widget.memberToken));
+                                    .bloc<MOCBloc>()
+                                    .add(FetchMOC(widget.memberToken));
                               } else {
                                 isProcessing = false;
                                 Flushbar(
@@ -280,8 +290,9 @@ class _CreateCloterState extends State<CreateCloter> {
                                   if (value.status) {
                                     isProcessing = false;
                                     Navigator.pop(context);
-                                    context.bloc<MCBloc>().add(
-                                        FetchMCommunities(widget.memberToken));
+                                    context
+                                        .bloc<MOCBloc>()
+                                        .add(FetchMOC(widget.memberToken));
                                   } else {
                                     isProcessing = false;
                                     _cloterData.foto = "";
@@ -375,12 +386,3 @@ class Item {
 
   Item(this.title, this.value);
 }
-
-List<Item> _arisanType = [
-  Item("Uang", "Uang"),
-  Item("Barang", "Barang"),
-];
-List<Item> _arisanSystem = [
-  Item("Kocok", "Kocok"),
-  Item("Menurun", "Menurun"),
-];

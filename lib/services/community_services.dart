@@ -127,6 +127,7 @@ class CommunityServices {
       return AuthResult(
           status: convertedData['status'], message: convertedData['message']);
     } catch (e) {
+      // throw Exception(e);
       print(e.toString());
       return AuthResult(
           status: false, message: "Can't getting Result from server");

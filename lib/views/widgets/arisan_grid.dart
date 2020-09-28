@@ -8,7 +8,7 @@ class ArisanGrid extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if(!cloterResult.status) {
+    if (!cloterResult.status) {
       return Container();
     }
     return StaggeredGridView.countBuilder(
@@ -20,10 +20,9 @@ class ArisanGrid extends StatelessWidget {
         cloter: cloterResult.data[index],
         memberToken: memberToken,
       ),
-      staggeredTileBuilder: (int index) =>
-          new StaggeredTile.fit(1),
-      mainAxisSpacing: 20.0,
-      crossAxisSpacing: 15.0,
+      staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
+      mainAxisSpacing: 15.0,
+      crossAxisSpacing: 10.0,
     );
   }
 }
