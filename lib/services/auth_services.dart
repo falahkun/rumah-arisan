@@ -2,6 +2,33 @@ part of 'services.dart';
 
 /// ini adalah class auth services
 class AuthServices {
+  static Future<AuthResult> loginSocial(String token,
+      {SocialProvider provider}) async {
+    try {
+      http.Response response;
+      if (provider == SocialProvider.GOOGLE_LOGIN) {
+        response = await postRequest('oauth/google', body: {'id_token': token});
+      } else if (provider == SocialProvider.FB_LOGIN) {
+        response =
+            await postRequest('oauth/facebook', body: {'accessToken': token});
+      }
+
+      var data = jsonDecode(response.body);
+
+      if (data != null && data['status']) {
+        saveSessions(data['accessToken']);
+      }
+
+      // print(data);
+      return AuthResult(status: data['status'], message: data['message']);
+    } catch (e) {
+      return AuthResult(
+        status: false,
+        message: "Error, Token Expired",
+      );
+    }
+  }
+
   /// ini adalah method untuk melakukan sign in
   static Future<AuthResult> signIn(String email, String password) async {
     try {
@@ -151,3 +178,5 @@ class AuthServices {
   /// agar lebih mudah untuk consumenya jadi kita pakai stream untuk listen data.
   static Stream<String> get onAuthStateChanged => _controller.stream;
 }
+
+enum SocialProvider { GOOGLE_LOGIN, FB_LOGIN }

@@ -93,21 +93,41 @@ class _SignInPageState extends State<SignInPage> {
                           ],
                         ),
 
-                        /// ini adalah bloc kode untuk menambahkan metode sign in menggunakan social media
-                        // Row(
-                        //   children: [
-                        //     IconButton(
-                        //       padding: const EdgeInsets.only(right: 20),
-                        //       icon: Icon(MdiIcons.googlePlus),
-                        //       onPressed: () async {},
-                        //     ),
-                        //     IconButton(
-                        //       padding: const EdgeInsets.only(right: 20),
-                        //       icon: Icon(MdiIcons.facebook),
-                        //       onPressed: () {},
-                        //     )
-                        //   ],
-                        // )
+                        /// ini adalah blok kode untuk menambahkan metode sign in menggunakan social media
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                                onTap: () async {
+                                  await SocialAuthServices.getGoogleToken()
+                                      .then((value) {
+                                    print(value.message);
+                                  }).catchError((onError) {
+                                    print(onError.toString());
+                                  });
+                                },
+                                child: SvgPicture.asset(
+                                  'assets/icons/icons_google.svg',
+                                  height: 24,
+                                  width: 24,
+                                )),
+                            SizedBox(width: 15),
+                            GestureDetector(
+                                onTap: () async {
+                                  SocialAuthServices.getFbToken().then((value) {
+                                    print(value.message);
+                                  }).catchError((onError) {
+                                    print(onError.toString());
+                                  });
+                                },
+                                child: SvgPicture.asset(
+                                    'assets/icons/icons_facebook.svg',
+                                    height: 24,
+                                    width: 24)),
+                          ],
+                        )
                       ],
                     ),
                   ),

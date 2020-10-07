@@ -4,7 +4,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_pusher_client/flutter_pusher.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,6 +28,7 @@ part 'category_services.dart';
 part 'community_services.dart';
 part 'chat_services.dart';
 part 'pusher_services.dart';
+part 'socialauth_services.dart';
 
 /// ini adalah method untuk melakukan semua request yang akan digunakan nantinya
 Future<http.Response> postRequest(String subUrl,
