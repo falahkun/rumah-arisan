@@ -11,14 +11,26 @@ class CommunityPage extends StatefulWidget {
 
 class _CommunityPageState extends State<CommunityPage> {
   bool isExpandtext = false;
+
+  @override
+  initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     context
         .bloc<CommunityBloc>()
         .add(LoadCommunitiy(widget.slug, widget.memberToken));
+    context.bloc<CfBloc>().add(CfFetch(
+          widget.memberToken,
+          widget.slug,
+        ));
     return WillPopScope(
       onWillPop: () async {
         context.bloc<CommunityBloc>().add(null);
+        context.bloc<CfBloc>().add(null);
         return false;
       },
       child: Scaffold(
@@ -50,6 +62,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                             context
                                                 .bloc<CommunityBloc>()
                                                 .add(null);
+                                            context.bloc<CfBloc>().add(null);
                                             Navigator.pop(context);
                                           },
                                           child: SvgPicture.asset(
@@ -385,6 +398,19 @@ class _CommunityPageState extends State<CommunityPage> {
                                           ],
                                         ),
                                       ],
+                                    ),
+                                    BlocBuilder<CfBloc, CfBlocState>(
+                                      builder: (_, state) =>
+                                          (state is CfBlocLoaded)
+                                              ? (!state.cf.status)
+                                                  ? Text(state.cf.message)
+                                                  : Column(
+                                                      children: state.cf.data
+                                                          .map((e) => FeedItem(
+                                                                model: e,
+                                                              ))
+                                                          .toList())
+                                              : LinearProgressIndicator(),
                                     ),
                                   ],
                                 ))

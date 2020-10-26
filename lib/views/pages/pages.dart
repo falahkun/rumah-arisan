@@ -45,3 +45,6 @@ part 'create_community.dart';
 part 'search_page.dart';
 part 'my_cloter.dart';
 part 'create_cloter.dart';
+part 'profile_page.dart';
+part 'member_page.dart';
+part 'notif_page.dart';

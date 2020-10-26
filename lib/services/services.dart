@@ -29,6 +29,7 @@ part 'community_services.dart';
 part 'chat_services.dart';
 part 'pusher_services.dart';
 part 'socialauth_services.dart';
+part 'notification_services.dart';
 
 /// ini adalah method untuk melakukan semua request yang akan digunakan nantinya
 Future<http.Response> postRequest(String subUrl,

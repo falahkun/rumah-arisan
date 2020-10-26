@@ -17,3 +17,6 @@ part 'community_results.dart';
 part 'community_discuss_model.dart';
 part 'messages_result.dart';
 part 'chat_result.dart';
+part 'update_notif_model.dart';
+part 'member_model.dart';
+part 'cf_model.dart';

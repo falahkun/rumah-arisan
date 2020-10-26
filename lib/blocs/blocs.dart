@@ -15,3 +15,6 @@ export '../blocs/chats/chats_bloc.dart';
 export '../blocs/messages/message_bloc.dart';
 export '../blocs/member_komunitas/mcommunities_bloc.dart';
 export '../blocs/my-own-cloter/moc_bloc.dart';
+export '../blocs/update_notif/un_bloc.dart';
+export '../blocs/member_d/memberd_bloc.dart';
+export '../blocs/cf/cf_bloc.dart';

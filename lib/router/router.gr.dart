@@ -27,6 +27,9 @@ class Routes {
   static const String searchPage = '/search-page';
   static const String myCloter = '/my-cloter';
   static const String createCloter = '/create-cloter';
+  static const String memberPage = '/member-page';
+  static const String notifPage = '/notif-page';
+  static const String profilePage = '/profile-page';
   static const all = <String>{
     wrapper,
     mainPage,
@@ -41,6 +44,9 @@ class Routes {
     searchPage,
     myCloter,
     createCloter,
+    memberPage,
+    notifPage,
+    profilePage,
   };
 }
 
@@ -61,6 +67,9 @@ class Router extends RouterBase {
     RouteDef(Routes.searchPage, page: SearchPage),
     RouteDef(Routes.myCloter, page: MyCloter),
     RouteDef(Routes.createCloter, page: CreateCloter),
+    RouteDef(Routes.memberPage, page: MemberPage),
+    RouteDef(Routes.notifPage, page: NotifPage),
+    RouteDef(Routes.profilePage, page: ProfilePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -224,6 +233,37 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    MemberPage: (data) {
+      final args = data.getArgs<MemberPageArguments>(
+        orElse: () => MemberPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MemberPage(
+          key: args.key,
+          slug: args.slug,
+        ),
+        settings: data,
+      );
+    },
+    NotifPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => NotifPage(),
+        settings: data,
+      );
+    },
+    ProfilePage: (data) {
+      final args = data.getArgs<ProfilePageArguments>(
+        orElse: () => ProfilePageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ProfilePage(
+          key: args.key,
+          memberToken: args.memberToken,
+          user: args.user,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -330,4 +370,19 @@ class CreateCloterArguments {
   final String memberToken;
   final CloterData cloter;
   CreateCloterArguments({this.key, this.memberToken, this.cloter});
+}
+
+/// MemberPage arguments holder class
+class MemberPageArguments {
+  final Key key;
+  final String slug;
+  MemberPageArguments({this.key, this.slug});
+}
+
+/// ProfilePage arguments holder class
+class ProfilePageArguments {
+  final Key key;
+  final String memberToken;
+  final DataResultToken user;
+  ProfilePageArguments({this.key, this.memberToken, this.user});
 }

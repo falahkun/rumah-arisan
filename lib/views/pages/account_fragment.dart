@@ -6,6 +6,7 @@ class AccountFragment extends StatelessWidget {
   const AccountFragment({Key key, this.tokenResult}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print(tokenResult.data.nama);
     return Scaffold(
       body: ListView(
         children: [
@@ -71,14 +72,15 @@ class AccountFragment extends StatelessWidget {
                   4,
                   (index) => MenuItem(
                         onTap: () {
-                          if(index == 0)
-                          Navigator.pushNamed(context, Routes.myCommunitiesPage,
-                              arguments: MyCommunitiesPageArguments(
-                                  memberToken: tokenResult.data.token));
-                          if(index ==1 )
-                          Navigator.pushNamed(context, Routes.myCloter, arguments: MyCloterArguments(
-                            memberToken: tokenResult.data.token
-                          ));
+                          if (index == 0)
+                            Navigator.pushNamed(
+                                context, Routes.myCommunitiesPage,
+                                arguments: MyCommunitiesPageArguments(
+                                    memberToken: tokenResult.data.token));
+                          if (index == 1)
+                            Navigator.pushNamed(context, Routes.myCloter,
+                                arguments: MyCloterArguments(
+                                    memberToken: tokenResult.data.token));
                         },
                         title: "Menu $index",
                       )),

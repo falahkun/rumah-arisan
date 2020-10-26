@@ -46,4 +46,17 @@ class ChatServices {
       print(e.toString());
     }
   }
+
+  static Future<MemberModel> fetchMember(String slug,
+      {String memberToken}) async {
+    try {
+      final response =
+          await getRequest("member?slug=$slug", memberToken: memberToken);
+
+      return memberModelFromJson(response.body);
+    } catch (e) {
+      print(e.toString());
+      return MemberModel(status: false, message: "Oops Something else!");
+    }
+  }
 }

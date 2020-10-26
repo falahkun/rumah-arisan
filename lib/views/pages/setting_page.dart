@@ -42,25 +42,27 @@ class _SettingPageState extends State<SettingPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  buildListTile(
-                    "Account",
-                    trailing: ClipPath.shape(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6)),
-                      child: widget.tokenResult.data.foto == null
-                          ? Image.asset(
-                              "assets/images/profile_unfilled.png",
-                              width: 24,
-                              height: 24,
-                            )
-                          : Image.network(
-                              widget.tokenResult.data.foto,
-                              width: 24,
-                              height: 24,
-                              fit: BoxFit.cover,
-                            ),
-                    ),
-                  ),
+                  buildListTile("Account",
+                      trailing: ClipPath.shape(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6)),
+                        child: widget.tokenResult.data.foto == null
+                            ? Image.asset(
+                                "assets/images/profile_unfilled.png",
+                                width: 24,
+                                height: 24,
+                              )
+                            : Image.network(
+                                widget.tokenResult.data.foto,
+                                width: 24,
+                                height: 24,
+                                fit: BoxFit.cover,
+                              ),
+                      ), onTap: () {
+                    Navigator.pushNamed(context, Routes.profilePage,
+                        arguments: ProfilePageArguments(
+                            user: widget.tokenResult.data));
+                  }),
                   buildListTile("Kebijakan Rumah Arisan"),
                   buildListTile("Kebijakan Privasi"),
                   buildListTile("Tentang Kami"),

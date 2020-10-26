@@ -19,6 +19,9 @@ import 'package:rumah_arisan/views/pages/pages.dart';
     MaterialRoute(page: SearchPage),
     MaterialRoute(page: MyCloter),
     MaterialRoute(page: CreateCloter),
+    MaterialRoute(page: MemberPage),
+    MaterialRoute(page: NotifPage),
+    MaterialRoute(page: ProfilePage),
   ],
 )
 class $Router {}

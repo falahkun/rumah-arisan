@@ -148,4 +148,17 @@ class CommunityServices {
           status: false, message: "Can't getting Result from server");
     }
   }
+
+  static Future<CfModel> fetchFeedCom(String slug,
+      {int limit = 100, int page = 1, String memberToken}) async {
+    try {
+      final http.Response response = await getRequest(
+          "komunitas/feeds?slug=$slug&limit=$limit&page=$page",
+          memberToken: memberToken);
+
+      return cfModelFromJson(response.body);
+    } catch (e) {
+      return CfModel(status: false, message: "something error!");
+    }
+  }
 }

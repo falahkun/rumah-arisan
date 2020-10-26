@@ -69,34 +69,52 @@ class _CloterDetailState extends State<CloterDetail> {
                                   SizedBox(height: 15),
                                   Row(
                                     children: [
-                                      ClipPath.shape(
-                                          shape: CircleBorder(),
-                                          child: Image.asset(
-                                            "assets/images/profile_unfilled.png",
-                                            fit: BoxFit.cover,
-                                            height: 35,
-                                            width: 35,
-                                          )),
-                                      SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                              cdState.cloterResult.cdetailData
-                                                      .namaOwner ??
-                                                  '-',
-                                              style:
-                                                  bold.copyWith(fontSize: 12)),
-                                          Text(
-                                            cdState.cloterResult.cdetailData
-                                                    .namaKabupaten ??
-                                                "-",
-                                            style:
-                                                regular.copyWith(fontSize: 10),
-                                          ),
-                                        ],
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, Routes.memberPage,
+                                              arguments: MemberPageArguments(
+                                                  slug: cdState.cloterResult
+                                                      .cdetailData.slugOwner));
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ClipPath.shape(
+                                                shape: CircleBorder(),
+                                                child: Image.asset(
+                                                  "assets/images/profile_unfilled.png",
+                                                  fit: BoxFit.cover,
+                                                  height: 35,
+                                                  width: 35,
+                                                )),
+                                            SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                    cdState
+                                                            .cloterResult
+                                                            .cdetailData
+                                                            .namaOwner ??
+                                                        '-',
+                                                    style: bold.copyWith(
+                                                        fontSize: 12)),
+                                                Text(
+                                                  cdState
+                                                          .cloterResult
+                                                          .cdetailData
+                                                          .namaKabupaten ??
+                                                      "-",
+                                                  style: regular.copyWith(
+                                                      fontSize: 10),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Spacer(),
                                       FlatButton(
