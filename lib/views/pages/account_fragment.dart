@@ -12,9 +12,9 @@ class AccountFragment extends StatelessWidget {
         children: [
           TopSetting(
             onTap: () {
-              Navigator.pushNamed(context, Routes.settingPage,
-                  arguments: SettingPageArguments(tokenResult: tokenResult));
-              // context.bloc<PageBloc>().add(GoToSettingPage(tokenResult));
+              Get.to(SettingPage(
+                tokenResult: tokenResult,
+              ));
             },
           ),
           Padding(
@@ -73,14 +73,12 @@ class AccountFragment extends StatelessWidget {
                   (index) => MenuItem(
                         onTap: () {
                           if (index == 0)
-                            Navigator.pushNamed(
-                                context, Routes.myCommunitiesPage,
-                                arguments: MyCommunitiesPageArguments(
-                                    memberToken: tokenResult.data.token));
+                            Get.to(MyCommunitiesPage(
+                              memberToken: tokenResult.data.token,
+                            ));
                           if (index == 1)
-                            Navigator.pushNamed(context, Routes.myCloter,
-                                arguments: MyCloterArguments(
-                                    memberToken: tokenResult.data.token));
+                            Get.to(
+                                MyCloter(memberToken: tokenResult.data.token));
                         },
                         title: "Menu $index",
                       )),

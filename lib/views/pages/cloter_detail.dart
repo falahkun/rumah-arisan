@@ -71,11 +71,15 @@ class _CloterDetailState extends State<CloterDetail> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          Navigator.pushNamed(
-                                              context, Routes.memberPage,
-                                              arguments: MemberPageArguments(
-                                                  slug: cdState.cloterResult
-                                                      .cdetailData.slugOwner));
+                                          Get.to(MemberPage(
+                                            slug: cdState.cloterResult
+                                                .cdetailData.slugOwner,
+                                          ));
+                                          // Navigator.pushNamed(
+                                          //     context, Routes.memberPage,
+                                          //     arguments: MemberPageArguments(
+                                          //         slug: cdState.cloterResult
+                                          //             .cdetailData.slugOwner));
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,

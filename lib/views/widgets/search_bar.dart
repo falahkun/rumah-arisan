@@ -3,6 +3,7 @@ part of 'widgets.dart';
 class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final String _memberToken = Provider.of<String>(context);
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
@@ -18,7 +19,10 @@ class SearchBar extends StatelessWidget {
       width: double.infinity,
       child: TextField(
         onTap: () {
-          Navigator.pushNamed(context, Routes.searchPage);
+          Get.to(SearchPage(
+            memberToken: _memberToken,
+          ));
+          // Navigator.pushNamed(context, Routes.searchPage);
         },
         enabled: false,
         decoration: InputDecoration(

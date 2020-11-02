@@ -15,9 +15,10 @@ class _MyCommunitiesPageState extends State<MyCommunitiesPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.createCommunity,
-              arguments:
-                  CreateCommunityArguments(memberToken: widget.memberToken));
+          Get.to(CreateCommunity(memberToken: widget.memberToken));
+          // Navigator.pushNamed(context, Routes.createCommunity,
+          //     arguments:
+          //         CreateCommunityArguments(memberToken: widget.memberToken));
         },
         child: Icon(Icons.add),
       ),
@@ -45,11 +46,15 @@ class _MyCommunitiesPageState extends State<MyCommunitiesPage> {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, Routes.createCommunity,
-                                arguments: CreateCommunityArguments(
-                                  community: item,
-                                  memberToken: widget.memberToken,
-                                ));
+                            Get.to(CreateCommunity(
+                              community: item,
+                              memberToken: widget.memberToken,
+                            ));
+                            // Navigator.pushNamed(context, Routes.createCommunity,
+                            //     arguments: CreateCommunityArguments(
+                            //       community: item,
+                            //       memberToken: widget.memberToken,
+                            //     ));
                           },
                           child: CommunityItem(
                             title: item.nama,

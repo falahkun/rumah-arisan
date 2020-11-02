@@ -59,9 +59,10 @@ class _SettingPageState extends State<SettingPage> {
                                 fit: BoxFit.cover,
                               ),
                       ), onTap: () {
-                    Navigator.pushNamed(context, Routes.profilePage,
-                        arguments: ProfilePageArguments(
-                            user: widget.tokenResult.data));
+                    Get.to(ProfilePage(user: widget.tokenResult.data));
+                    // Navigator.pushNamed(context, Routes.profilePage,
+                    //     arguments: ProfilePageArguments(
+                    //         user: widget.tokenResult.data));
                   }),
                   buildListTile("Kebijakan Rumah Arisan"),
                   buildListTile("Kebijakan Privasi"),

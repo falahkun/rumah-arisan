@@ -15,11 +15,15 @@ class CloterGridItem extends StatelessWidget {
           context
               .bloc<CdetailBloc>()
               .add(LoadCDetail(cloter.slug, memberToken));
-          Navigator.pushNamed(context, Routes.cloterDetail,
-              arguments: CloterDetailArguments(
-                memberToken: memberToken,
-                slug: cloter.slug,
-              ));
+          Get.to(CloterDetail(
+            memberToken: memberToken,
+            slug: cloter.slug,
+          ));
+          // Navigator.pushNamed(context, Routes.cloterDetail,
+          //     arguments: CloterDetailArguments(
+          //       memberToken: memberToken,
+          //       slug: cloter.slug,
+          //     ));
         },
         child: Container(
           height: 250 + 10.0,

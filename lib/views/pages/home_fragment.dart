@@ -82,17 +82,24 @@ class _HomeFragmentState extends State<HomeFragment>
                                                   : 0),
                                           child: GestureDetector(
                                             onTap: () {
-                                              Navigator.pushNamed(
-                                                  context, Routes.communityPage,
-                                                  arguments:
-                                                      CommunityPageArguments(
-                                                          memberToken:
-                                                              widget.tokenResult
-                                                                  .data.token,
-                                                          slug: state
-                                                              .communitiesResult
-                                                              .data[index]
-                                                              .slug));
+                                              Get.to(CommunityPage(
+                                                memberToken: widget
+                                                    .tokenResult.data.token,
+                                                slug: state.communitiesResult
+                                                    .data[index].slug,
+                                              ));
+
+                                              // Navigator.pushNamed(
+                                              //     context, Routes.communityPage,
+                                              //     arguments:
+                                              //         CommunityPageArguments(
+                                              //             memberToken:
+                                              //                 widget.tokenResult
+                                              //                     .data.token,
+                                              //             slug: state
+                                              //                 .communitiesResult
+                                              //                 .data[index]
+                                              //                 .slug));
                                             },
                                             child: CommunityItem(
                                               isLiked: false,
@@ -184,12 +191,17 @@ class _HomeFragmentState extends State<HomeFragment>
                 Expanded(
                     child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.searchPage,
-                              arguments: SearchPageArguments(
-                                  memberToken: widget.tokenResult.data.token,
-                                  query: "",
-                                  slug: "",
-                                  currentIndex: 0));
+                          Get.to(SearchPage(
+                              memberToken: widget.tokenResult.data.token,
+                              query: "",
+                              slug: "",
+                              currentIndex: 0));
+                          // Navigator.pushNamed(context, Routes.searchPage,
+                          //     arguments: SearchPageArguments(
+                          //         memberToken: widget.tokenResult.data.token,
+                          //         query: "",
+                          //         slug: "",
+                          //         currentIndex: 0));
                         },
                         child: Hero(tag: "search-bar", child: SearchBar()))),
                 SizedBox(
@@ -206,9 +218,11 @@ class _HomeFragmentState extends State<HomeFragment>
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.messagesPage,
-                        arguments: MessagesPageArguments(
-                            memberToken: widget.tokenResult.data.token));
+                    Get.to(MessagesPage(
+                        memberToken: widget.tokenResult.data.token));
+                    // Navigator.pushNamed(context, Routes.messagesPage,
+                    //     arguments: MessagesPageArguments(
+                    //         memberToken: widget.tokenResult.data.token));
                   },
                   child: SvgPicture.asset(
                     "assets/icons/Bold/Message.svg",
@@ -222,7 +236,8 @@ class _HomeFragmentState extends State<HomeFragment>
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.notifPage);
+                    Get.to(NotifPage());
+                    // Navigator.pushNamed(context, Routes.notifPage);
                   },
                   child: SvgPicture.asset(
                     "assets/icons/Bold/Notification.svg",
