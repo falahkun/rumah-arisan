@@ -19,7 +19,7 @@ class TopSetting extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: onTap,
+            onTap: () => Get.back(),
             child: SvgPicture.asset("assets/icons/Light/Setting.svg"),
           )
         ],

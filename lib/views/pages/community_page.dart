@@ -71,13 +71,17 @@ class _CommunityPageState extends State<CommunityPage> {
                                         children: [
                                           GestureDetector(
                                               onTap: () {
-                                                Navigator.pushNamed(context,
-                                                    Routes.communityDiscussPage,
-                                                    arguments:
-                                                        CommunityDiscussPageArguments(
-                                                            memberToken: widget
-                                                                .memberToken,
-                                                            slug: widget.slug));
+                                                Get.to(CommunityDiscussPage(
+                                                    memberToken:
+                                                        widget.memberToken,
+                                                    slug: widget.slug));
+                                                // Navigator.pushNamed(context,
+                                                //     Routes.communityDiscussPage,
+                                                //     arguments:
+                                                //         CommunityDiscussPageArguments(
+                                                //             memberToken: widget
+                                                //                 .memberToken,
+                                                //             slug: widget.slug));
                                               },
                                               child: SvgPicture.asset(
                                                   "assets/icons/Light/Chat.svg")),

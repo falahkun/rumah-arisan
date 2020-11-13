@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:rumah_arisan/blocs/blocs.dart';
 import 'package:rumah_arisan/models/models.dart';
-import 'package:rumah_arisan/router/router.gr.dart';
 import 'package:rumah_arisan/shareds/shareds.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../pages/pages.dart';
 
 part 'splash_item.dart';
 part 'top_bar.dart';

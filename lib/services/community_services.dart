@@ -21,6 +21,7 @@ class CommunityServices {
       final response = await getRequest("komunitas", memberToken: memberToken);
       return communityResultsFromJson(response.body);
     } catch (e) {
+      // throw Exception(e);
       print(e.toString());
       return CommunityResults(status: false, message: "can't Reach Server");
     }

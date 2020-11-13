@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_arisan/blocs/blocs.dart';
-import 'package:rumah_arisan/router/router.gr.dart';
 import 'package:rumah_arisan/services/services.dart';
 import 'package:rumah_arisan/views/pages/pages.dart';
 
@@ -63,16 +63,14 @@ class MyApp extends StatelessWidget {
         child: FutureBuilder(
             future: Firebase.initializeApp(),
             builder: (context, snapshot) {
-              return MaterialApp(
+              return GetMaterialApp(
                 debugShowCheckedModeBanner: false,
                 title: 'Rumah Arisan',
                 theme: ThemeData(
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                     scaffoldBackgroundColor: Colors.white),
-                // home: NotifPage(),
-                initialRoute: "/",
-                onGenerateRoute: Router().onGenerateRoute,
+                home: Wrapper(),
               );
             }),
       ),

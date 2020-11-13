@@ -31,12 +31,17 @@ class _MessagesPageState extends State<MessagesPage> {
                             state.messagesResult.data.length,
                             (index) => GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, Routes.chatPage,
-                                    arguments: ChatPageArguments(
-                                        id: state.messagesResult.data[index].id,
-                                        memberToken: widget.memberToken,
-                                        token: state
-                                            .messagesResult.data[index].token));
+                                Get.to(ChatPage(
+                                    id: state.messagesResult.data[index].id,
+                                    memberToken: widget.memberToken,
+                                    token: state
+                                        .messagesResult.data[index].token));
+                                // Navigator.pushNamed(context, Routes.chatPage,
+                                //     arguments: ChatPageArguments(
+                                //         id: state.messagesResult.data[index].id,
+                                //         memberToken: widget.memberToken,
+                                //         token: state
+                                //             .messagesResult.data[index].token));
                               },
                               child: MessageItem(
                                 lastMessage:

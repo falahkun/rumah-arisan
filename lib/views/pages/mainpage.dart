@@ -88,7 +88,7 @@ class MainPageState extends State<MainPage> {
                             height: 22,
                             width: 22,
                           ),
-                          title: Text("Home")),
+                          label: "Home"),
                       BottomNavigationBarItem(
                           icon: SvgPicture.asset(
                             "assets/icons/Light/Activity.svg",
@@ -101,7 +101,7 @@ class MainPageState extends State<MainPage> {
                             height: 22,
                             width: 22,
                           ),
-                          title: Text("Feeds")),
+                          label: "Feeds"),
                       BottomNavigationBarItem(
                           icon: SvgPicture.asset(
                             "assets/icons/Light/Category.svg",
@@ -114,7 +114,7 @@ class MainPageState extends State<MainPage> {
                             height: 22,
                             width: 22,
                           ),
-                          title: Text("Categories")),
+                          label: "Categories"),
                       BottomNavigationBarItem(
                           icon: SvgPicture.asset(
                             "assets/icons/Light/Bag.svg",
@@ -127,7 +127,7 @@ class MainPageState extends State<MainPage> {
                             height: 22,
                             width: 22,
                           ),
-                          title: Text("Cart")),
+                          label: "Cart"),
                       BottomNavigationBarItem(
                           icon: SvgPicture.asset(
                             "assets/icons/Light/Profile.svg",
@@ -140,7 +140,7 @@ class MainPageState extends State<MainPage> {
                             height: 22,
                             width: 22,
                           ),
-                          title: Text("Account")),
+                          label: "Account"),
                     ],
                     type: BottomNavigationBarType.fixed,
                     onTap: (index) {

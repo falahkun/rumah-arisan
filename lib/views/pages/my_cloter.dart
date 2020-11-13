@@ -15,10 +15,13 @@ class _MyCloterState extends State<MyCloter> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.createCloter,
-              arguments: CreateCloterArguments(
-                memberToken: widget.memberToken,
-              ));
+          Get.to(CreateCloter(
+            memberToken: widget.memberToken,
+          ));
+          // Navigator.pushNamed(context, Routes.createCloter,
+          //     arguments: CreateCloterArguments(
+
+          //     ));
         },
         child: Icon(Icons.add),
       ),
@@ -45,11 +48,15 @@ class _MyCloterState extends State<MyCloter> {
                         print(state.cloter.data.length);
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, Routes.createCloter,
-                                arguments: CreateCloterArguments(
-                                  cloter: item,
-                                  memberToken: widget.memberToken,
-                                ));
+                            Get.to(CreateCloter(
+                              cloter: item,
+                              memberToken: widget.memberToken,
+                            ));
+                            // Navigator.pushNamed(context, Routes.createCloter,
+                            //     arguments: CreateCloterArguments(
+                            //       cloter: item,
+                            //       memberToken: widget.memberToken,
+                            //     ));
                           },
                           child: ArisanHorizontalItem(
                             imageUrl: item.foto,
